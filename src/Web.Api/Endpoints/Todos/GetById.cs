@@ -1,4 +1,5 @@
-﻿using Application.Abstractions.Messaging;
+﻿using System.Diagnostics.CodeAnalysis;
+using Application.Abstractions.Messaging;
 using Application.Todos.GetById;
 using SharedKernel;
 using Web.Api.Extensions;
@@ -6,6 +7,7 @@ using Web.Api.Infrastructure;
 
 namespace Web.Api.Endpoints.Todos;
 
+[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.AllConstructors)]
 internal sealed class GetById : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
