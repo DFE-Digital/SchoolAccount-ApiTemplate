@@ -10,18 +10,16 @@ internal sealed class GetById : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("todos/{id:guid}", async (
-            Guid id,
+        app.MapGet("todos", async (
             IQueryHandler<GetTodoByIdQuery, TodoResponse> handler,
             CancellationToken cancellationToken) =>
         {
-            var command = new GetTodoByIdQuery(id);
+            var query = new GetTodoByIdQuery(Guid.NewGuid());
 
-            Result<TodoResponse> result = await handler.Handle(command, cancellationToken);
+            Result<TodoResponse> result = await handler.Handle(query, cancellationToken);
 
             return result.Match(Results.Ok, CustomResults.Problem);
         })
-        .WithTags(Tags.Todos)
-        .RequireAuthorization();
+        .WithTags(Tags.Todos);
     }
 }
