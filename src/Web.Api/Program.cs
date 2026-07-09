@@ -11,7 +11,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
-builder.Services.AddSwaggerGenWithAuth();
+builder.Services.AddSwaggerGeneration();
 
 builder.Services
     .AddApplication()
@@ -27,8 +27,6 @@ app.MapEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerWithUi();
-
-    app.ApplyMigrations();
 }
 
 app.MapHealthChecks("health", new HealthCheckOptions
