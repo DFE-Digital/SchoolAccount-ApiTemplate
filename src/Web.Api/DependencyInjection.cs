@@ -6,8 +6,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPresentation(this IServiceCollection services)
     {
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddOpenApi(static o =>
+            o.CreateSchemaReferenceId = t => t.Type.FullName?.Replace('+', '-'));
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
 
