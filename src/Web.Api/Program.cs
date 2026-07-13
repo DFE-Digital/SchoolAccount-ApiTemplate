@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGeneration();
 builder.Services
     .AddApplication()
     .AddPresentation()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure();
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
@@ -39,9 +39,5 @@ app.UseRequestContextLogging();
 app.UseSerilogRequestLogging();
 
 app.UseExceptionHandler();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
 
 await app.RunAsync();

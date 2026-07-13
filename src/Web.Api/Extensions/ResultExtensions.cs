@@ -1,4 +1,5 @@
 ﻿using SharedKernel;
+// ReSharper disable UnusedMember.Global
 
 namespace Web.Api.Extensions;
 
