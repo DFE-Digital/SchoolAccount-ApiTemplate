@@ -11,7 +11,8 @@
   "forwardPorts": [5100, "seq:80", "postgres:5432"],
   "portsAttributes": {
     "5100": {
-      "protocol": "http"
+      "protocol": "http",
+      "label": "SchoolAccount API Template"
     },
     "seq:80": {
       "label": "Seq UI"
