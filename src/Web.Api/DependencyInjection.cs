@@ -6,8 +6,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPresentation(this IServiceCollection services)
     {
-        services.AddOpenApi(static o =>
-            o.CreateSchemaReferenceId = t => t.Type.FullName?.Replace('+', '-'));
+        services.AddOpenApi();
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
 
