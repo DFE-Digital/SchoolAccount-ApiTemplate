@@ -6,8 +6,7 @@ services:
       context: .
       dockerfile: src/Web.Api/Dockerfile
     ports:
-      - "5000:8080"
-      - "5001:8081"
+      - "5100:8080"      
 
   postgres:
     image: postgres:17
@@ -32,4 +31,4 @@ services:
     environment:
       - ACCEPT_EULA=Y
     ports:
-      - "8081:80"
+      - "5341:80"
