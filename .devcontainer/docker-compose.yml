@@ -16,5 +16,8 @@ services:
       seq:
         condition: service_started
     environment:
+      # Routes MSBuild intermediate output to obj/container/ so host and
+      # container restores don't overwrite each other (Directory.Build.props).
+      - DEVCONTAINER=true
       - ConnectionStrings__Database=Host=postgres;Port=5432;Database=clean-architecture;Username=postgres;Password=postgres;Include Error Detail=true
       - Serilog__WriteTo__1__Args__ServerUrl=http://seq:5341
