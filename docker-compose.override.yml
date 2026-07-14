@@ -4,6 +4,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
+      # Override the localhost defaults in appsettings.Development.json with
+      # compose-network addresses; env vars take precedence over appsettings.
+      - ConnectionStrings__Database=Host=postgres;Port=5432;Database=clean-architecture;Username=postgres;Password=postgres;Include Error Detail=true
+      - Serilog__WriteTo__1__Args__ServerUrl=http://seq:5341
     ports:
       - "8080"
       - "8081"
