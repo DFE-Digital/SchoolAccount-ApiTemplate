@@ -1,0 +1,11 @@
+services:
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/dotnet:1-10.0
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    environment:
+      # Override the localhost defaults in appsettings.Development.json with
+      # compose-network addresses; env vars take precedence over appsettings.
+      - ConnectionStrings__Database=Host=postgres;Port=5432;Database=clean-architecture;Username=postgres;Password=postgres;Include Error Detail=true
+      - Serilog__WriteTo__1__Args__ServerUrl=http://seq:5341

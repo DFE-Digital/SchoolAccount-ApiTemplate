@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "SchoolAccount-ApiTemplate",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.yml"
+  ],
+  "service": "devcontainer",
+  "runServices": ["devcontainer", "postgres", "seq"],
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [5100, "seq:80", "postgres:5432"],
+  "portsAttributes": {
+    "5100": {
+      "protocol": "http"
+    },
+    "seq:80": {
+      "label": "Seq UI"
+    },
+    "postgres:5432": {
+      "label": "PostgreSQL"
+    }
+  },
+  "postCreateCommand": "dotnet restore SchoolAccount.ApiTemplate.slnx",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "jetbrains": {
+      "backend": "Rider"
+    }
+  }
+}
