@@ -6,7 +6,9 @@ services:
       context: ./.devcontainer
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspace:cached
+      # Like build.context above, this resolves against the base compose
+      # file's directory (the repo root), so "." is the repo itself.
+      - .:/workspace:cached
     command: sleep infinity
     depends_on:
       postgres:
