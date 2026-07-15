@@ -1,23 +1,14 @@
 services:
   devcontainer:
     build:
-      # Paths in merged compose files resolve against the *base* file's
-      # directory (the repo root), not this file's directory.
       context: ./.devcontainer
       dockerfile: Dockerfile
     volumes:
-      # Like build.context above, this resolves against the base compose
-      # file's directory (the repo root), so "." is the repo itself.
       - .:/workspace:cached
     command: sleep infinity
     depends_on:
-      postgres:
-        condition: service_healthy
       seq:
         condition: service_started
     environment:
-      # Routes MSBuild intermediate output to obj/container/ so host and
-      # container restores don't overwrite each other (Directory.Build.props).
       - DEVCONTAINER=true
-      - ConnectionStrings__Database=Host=postgres;Port=5432;Database=clean-architecture;Username=postgres;Password=postgres;Include Error Detail=true
       - Serilog__WriteTo__1__Args__ServerUrl=http://seq:5341

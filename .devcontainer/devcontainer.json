@@ -6,26 +6,23 @@
     "docker-compose.yml"
   ],
   "service": "devcontainer",
-  "runServices": ["devcontainer", "postgres", "seq"],
+  "runServices": ["devcontainer", "seq"],
   "workspaceFolder": "/workspace",
-  "forwardPorts": [5100, "seq:80", "postgres:5432"],
+  "forwardPorts": [5100, "seq:80"],
   "portsAttributes": {
     "5100": {
       "protocol": "http",
-      "label": "SchoolAccount API Template"
+      "label": "DevContainer"
     },
     "seq:80": {
       "label": "Seq UI"
-    },
-    "postgres:5432": {
-      "label": "PostgreSQL"
     }
   },
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y postgresql-client && dotnet tool install --global dotnet-ef && dotnet restore SchoolAccount.ApiTemplate.slnx",
+  "postCreateCommand": "sudo apt-get update && dotnet restore SchoolAccount.ApiTemplate.slnx",
   "shutdownAction": "none",
   "customizations": {
     "jetbrains": {
