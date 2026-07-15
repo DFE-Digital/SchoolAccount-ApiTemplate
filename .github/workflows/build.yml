@@ -5,30 +5,33 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 env:
-  DOTNET_VERSION: "9.x"
+  DOTNET_VERSION: "10.x"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore
-        run: dotnet restore CleanArchitecture.sln
+        run: dotnet restore SchoolAccount.ApiTemplate.slnx
 
       - name: Build
-        run: dotnet build CleanArchitecture.sln --configuration Release --no-restore
+        run: dotnet build SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test CleanArchitecture.sln --configuration Release --no-restore --no-build
+        run: dotnet test SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
 
       - name: Publish
-        run: dotnet publish CleanArchitecture.sln --configuration Release --no-restore --no-build
+        run: dotnet publish SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
