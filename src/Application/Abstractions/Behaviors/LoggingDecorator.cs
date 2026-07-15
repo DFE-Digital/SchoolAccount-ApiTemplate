@@ -1,4 +1,5 @@
-﻿using Application.Abstractions.Messaging;
+﻿using System.Diagnostics.CodeAnalysis;
+using Application.Abstractions.Messaging;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
 using SharedKernel;
@@ -7,6 +8,7 @@ namespace Application.Abstractions.Behaviors;
 
 internal static partial class LoggingDecorator
 {
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.AllConstructors)]
     internal sealed class CommandHandler<TCommand, TResponse>(
         ICommandHandler<TCommand, TResponse> innerHandler,
         ILogger<CommandHandler<TCommand, TResponse>> logger)
@@ -37,6 +39,7 @@ internal static partial class LoggingDecorator
         }
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.AllConstructors)]
     internal sealed class CommandBaseHandler<TCommand>(
         ICommandHandler<TCommand> innerHandler,
         ILogger<CommandBaseHandler<TCommand>> logger)
@@ -66,7 +69,7 @@ internal static partial class LoggingDecorator
             return result;
         }
     }
-
+    
     internal sealed class QueryHandler<TQuery, TResponse>(
         IQueryHandler<TQuery, TResponse> innerHandler,
         ILogger<QueryHandler<TQuery, TResponse>> logger)
