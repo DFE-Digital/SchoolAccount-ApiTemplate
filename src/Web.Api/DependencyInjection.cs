@@ -1,4 +1,5 @@
-﻿using Web.Api.Infrastructure;
+﻿using System.Text.Json.Serialization;
+using Web.Api.Infrastructure;
 
 namespace Web.Api;
 
@@ -9,7 +10,13 @@ public static class DependencyInjection
         services.AddOpenApi();
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
-
+        ReturnEnumsAsString(services);
         return services;
+    }
+
+    private static void ReturnEnumsAsString(IServiceCollection services)
+    {
+        services.ConfigureHttpJsonOptions(options =>
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
     }
 }

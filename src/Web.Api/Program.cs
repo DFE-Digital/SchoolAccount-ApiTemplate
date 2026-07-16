@@ -19,10 +19,6 @@ builder.Services
     .AddInfrastructure();
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
-// return enums as string rather than number
-builder.Services.ConfigureHttpJsonOptions(options =>
-    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-
 WebApplication app = builder.Build();
 
 app.MapEndpoints();
