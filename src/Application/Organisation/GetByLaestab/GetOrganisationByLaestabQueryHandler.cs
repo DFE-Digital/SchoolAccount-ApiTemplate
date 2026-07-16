@@ -11,26 +11,16 @@ internal sealed class GetOrganisationByLaestabQueryHandler(IDateTimeProvider dat
     public async Task<Result<OrganisationResponse>> Handle(GetOrganisationByLaestabQuery query,
         CancellationToken cancellationToken)
     {
-        // first 3 digits are local authority code, last 4 are establishment number
-        int localAuthorityCode = query.laestab / 10_000;
-        int establishmentNo = query.laestab % 10_000;
-
+        var laestabValue = new LaestabValue(query.laestab);
+        var statusCalculator = new StatusCalculator(dateTimeProvider);
+        
         var response = new OrganisationResponse
         {
-            LocalAuthorityCode = localAuthorityCode,
-            EstablishmentNo = establishmentNo,
-            Status = GetOpenStatus()
+            LocalAuthorityCode = laestabValue.LocalAuthorityCode,
+            EstablishmentNo = laestabValue.EstablishmentNumber,
+            Status = statusCalculator.GetOpenStatus(),
         };
 
         return await Task.FromResult(Result.Success(response));
-    }
-
-    private OrgStatus GetOpenStatus()
-    {
-        TimeSpan timeOfDay = dateTimeProvider.UtcNow.TimeOfDay;
-        return timeOfDay >= new System.TimeSpan(8, 0, 0)
-               && timeOfDay <= new System.TimeSpan(15, 30, 0)
-            ? OrgStatus.Open
-            : OrgStatus.Closed;
     }
 }
