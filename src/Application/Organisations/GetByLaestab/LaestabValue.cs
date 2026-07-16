@@ -2,6 +2,6 @@ namespace Application.Organisations.GetByLaestab;
 
 public class LaestabValue(string laestab)
 {
-    public string LocalAuthorityCode => laestab.Take(3).ToString();
-    public string EstablishmentNumber => laestab.Skip(3).ToString();
+    public string LocalAuthorityCode => laestab[..3];
+    public string EstablishmentNumber => laestab[3..];
 }
