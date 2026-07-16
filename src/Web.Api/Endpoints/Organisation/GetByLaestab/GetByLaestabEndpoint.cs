@@ -8,7 +8,7 @@ using Web.Api.Infrastructure;
 namespace Web.Api.Endpoints.Organisation.GetByLaestab;
 
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.AllConstructors)]
-internal sealed class GetByLaestab : IEndpoint
+internal sealed class GetByLaestabEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
