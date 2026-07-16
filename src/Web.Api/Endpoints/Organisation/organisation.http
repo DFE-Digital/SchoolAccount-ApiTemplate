@@ -1,0 +1,9 @@
+@API_HostAddress = http://localhost:5100
+
+### Get organisation with 7-digit laestab (expected 200)
+GET {{API_HostAddress}}/organisation/1234567
+Accept: application/json
+
+### Get organisation with 5-digit laestab (expected 404)
+GET {{API_HostAddress}}/organisation/12345
+Accept: application/json
