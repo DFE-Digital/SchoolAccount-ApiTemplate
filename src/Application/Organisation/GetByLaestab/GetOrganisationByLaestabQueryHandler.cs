@@ -27,8 +27,9 @@ internal sealed class GetOrganisationByLaestabQueryHandler(IDateTimeProvider dat
 
     private OrgStatus GetOpenStatus()
     {
-        return dateTimeProvider.UtcNow.TimeOfDay >= new System.TimeSpan(8, 0, 0)
-               && dateTimeProvider.UtcNow.TimeOfDay <= new System.TimeSpan(15, 30, 0)
+        TimeSpan timeOfDay = dateTimeProvider.UtcNow.TimeOfDay;
+        return timeOfDay >= new System.TimeSpan(8, 0, 0)
+               && timeOfDay <= new System.TimeSpan(15, 30, 0)
             ? OrgStatus.Open
             : OrgStatus.Closed;
     }
