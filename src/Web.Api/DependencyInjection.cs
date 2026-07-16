@@ -10,6 +10,7 @@ public static class DependencyInjection
         services.AddOpenApi();
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
+        services.AddValidation();
         ReturnEnumsAsString(services);
         return services;
     }
