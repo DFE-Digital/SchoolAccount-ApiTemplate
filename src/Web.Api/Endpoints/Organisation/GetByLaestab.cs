@@ -6,21 +6,22 @@ using Web.Api.Extensions;
 using Web.Api.Infrastructure;
 
 namespace Web.Api.Endpoints.Organisation;
+
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.AllConstructors)]
 internal sealed class GetByLaestab : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("organisation/{laestab}", async (
-                string laestab,
+        app.MapGet("organisation/{laestab:int}", async (
+                int laestab,
                 IQueryHandler<GetOrganisationByLaestabQuery, OrganisationResponse> handler,
                 CancellationToken cancellationToken) =>
             {
                 var query = new GetOrganisationByLaestabQuery(laestab);
 
-               Result<OrganisationResponse> result = await handler.Handle(query, cancellationToken);
+                Result<OrganisationResponse> result = await handler.Handle(query, cancellationToken);
 
-               return result.Match(Results.Ok, CustomResults.Problem);
+                return result.Match(Results.Ok, CustomResults.Problem);
             })
             .WithTags(Tags.Organisation);
     }
