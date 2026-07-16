@@ -2,5 +2,5 @@
 
 public static class Tags
 {
-    public const string Organisation = "Organisation";
+    public const string Organisations = "Organisations";
 }

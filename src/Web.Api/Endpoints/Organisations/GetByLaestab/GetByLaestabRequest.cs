@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Api.Endpoints.Organisation.GetByLaestab;
+namespace Web.Api.Endpoints.Organisations.GetByLaestab;
 
 public sealed record GetByLaestabRequest
 {

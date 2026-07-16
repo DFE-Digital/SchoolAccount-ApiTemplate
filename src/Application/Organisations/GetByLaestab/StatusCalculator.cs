@@ -1,6 +1,6 @@
 using SharedKernel;
 
-namespace Application.Organisation.GetByLaestab;
+namespace Application.Organisations.GetByLaestab;
 
 public class StatusCalculator(IDateTimeProvider dateTimeProvider)
 {

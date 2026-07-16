@@ -1,18 +1,18 @@
 using System.Diagnostics.CodeAnalysis;
 using Application.Abstractions.Messaging;
-using Application.Organisation.GetByLaestab;
+using Application.Organisations.GetByLaestab;
 using SharedKernel;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
 
-namespace Web.Api.Endpoints.Organisation.GetByLaestab;
+namespace Web.Api.Endpoints.Organisations.GetByLaestab;
 
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.AllConstructors)]
 internal sealed class GetByLaestabEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("organisation/{laestab}", async (
+        app.MapGet("organisations/{laestab}", async (
                 [AsParameters] GetByLaestabRequest request,
                 IQueryHandler<GetOrganisationByLaestabQuery, OrganisationResponse> handler,
                 CancellationToken cancellationToken) =>
@@ -23,6 +23,6 @@ internal sealed class GetByLaestabEndpoint : IEndpoint
 
                 return result.Match(Results.Ok, CustomResults.Problem);
             })
-            .WithTags(Tags.Organisation);
+            .WithTags(Tags.Organisations);
     }
 }

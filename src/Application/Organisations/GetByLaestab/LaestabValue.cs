@@ -1,4 +1,4 @@
-namespace Application.Organisation.GetByLaestab;
+namespace Application.Organisations.GetByLaestab;
 
 public class LaestabValue(string laestab)
 {
