@@ -7,7 +7,7 @@ public enum OrgStatus
 
 public sealed record OrganisationResponse
 {
-    public int LocalAuthorityCode { get; init; }
-    public int EstablishmentNo { get; init; }
+    public string LocalAuthorityCode { get; init; }
+    public string EstablishmentNo { get; init; }
     public OrgStatus Status { get; init; }
 }

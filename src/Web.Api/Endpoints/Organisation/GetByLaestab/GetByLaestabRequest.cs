@@ -7,5 +7,5 @@ public sealed record GetByLaestabRequest
 {
     [FromRoute]
     [RegularExpression(@"^\d{7}$", ErrorMessage = "LAESTAB identifiers are 7 character numeric only values in the format 1234567")]
-    public int Laestab { get; init; }
+    public string Laestab { get; init; }
 };
