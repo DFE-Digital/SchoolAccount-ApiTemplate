@@ -12,7 +12,7 @@ internal sealed class GetByLaestab : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("organisation/{laestab:int}", async (
+        app.MapGet("organisation/{laestab:regex(^\\d{{7}}$)}", async (
                 int laestab,
                 IQueryHandler<GetOrganisationByLaestabQuery, OrganisationResponse> handler,
                 CancellationToken cancellationToken) =>
