@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Application.Abstractions.Messaging;
+using System.Text.RegularExpressions;
+using System.Globalization;
 using SharedKernel;
 
 namespace Application.Organisation.GetByLaestab;
@@ -7,14 +9,19 @@ namespace Application.Organisation.GetByLaestab;
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.AllConstructors)]
 internal sealed class GetOrganisationByLaestabQueryHandler(IDateTimeProvider dateTimeProvider) : IQueryHandler<GetOrganisationByLaestabQuery, OrganisationResponse>
 {
+    private static readonly Regex LaestabRegex = new(@"^(?<lac>\d+)-(?<est>\d+)$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
     public async Task<Result<OrganisationResponse>> Handle(GetOrganisationByLaestabQuery query, CancellationToken cancellationToken)
     {
-        string[] parts = query.laestab.Split('-');
-        
-        if (parts.Length != 2 || !int.TryParse(parts[0], out int localAuthorityCode) || !int.TryParse(parts[1], out int establishmentNo))
+        Match match = LaestabRegex.Match(query.laestab);
+
+        if (!match.Success)
         {
             return Result.Failure<OrganisationResponse>(Error.Failure("InvalidLaestab", "Laestab format is invalid"));
         }
+
+        int localAuthorityCode = int.Parse(match.Groups["lac"].Value, NumberStyles.None, CultureInfo.InvariantCulture);
+        int establishmentNo = int.Parse(match.Groups["est"].Value, NumberStyles.None, CultureInfo.InvariantCulture);
 
         var response = new OrganisationResponse
         {
