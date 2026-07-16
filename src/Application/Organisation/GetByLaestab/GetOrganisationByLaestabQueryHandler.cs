@@ -11,7 +11,6 @@ internal sealed class GetOrganisationByLaestabQueryHandler(IDateTimeProvider dat
     public async Task<Result<OrganisationResponse>> Handle(GetOrganisationByLaestabQuery query,
         CancellationToken cancellationToken)
     {
-
         // first 3 digits are local authority code, last 4 are establishment number
         int localAuthorityCode = query.laestab / 10_000;
         int establishmentNo = query.laestab % 10_000;
