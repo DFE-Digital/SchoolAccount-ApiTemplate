@@ -42,9 +42,9 @@ inward:
 
 * `SharedKernel` - base building blocks (`Result`, `Error`) with no dependencies.
 * `Domain` - entities and business rules; depends only on `SharedKernel`.
-* `Application` - use cases as command/query handlers behind
-  `ICommandHandler`/`IQueryHandler`, plus cross-cutting decorators
-  (validation, logging); depends on `Domain` and `SharedKernel`.
+* `Application` - command/query handlers for each use case, implementing
+  `ICommandHandler`/`IQueryHandler` interfaces. Handlers are decorated with cross-cutting
+  concerns such as validation and logging. Depends on `Domain` and `SharedKernel`.
 * `Infrastructure` - EF Core/PostgreSQL persistence, authentication, time -
   implementations of abstractions the inner layers define; depends on
   `Application`.

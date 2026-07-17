@@ -2,6 +2,8 @@
   <Folder Name="/decisions/">
     <File Path="decisions\0000-adr-template.md" />
     <File Path="decisions\0001-record-architecture-decisions.md" />
+    <File Path="decisions\0002-use-clean-architecture.md" />
+    <File Path="decisions\0003-strip-imported-template-to-minimal-core.md" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
