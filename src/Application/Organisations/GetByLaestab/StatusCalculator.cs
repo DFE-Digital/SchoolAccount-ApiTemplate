@@ -15,7 +15,7 @@ public class StatusCalculator(IDateTimeProvider dateTimeProvider)
         TimeSpan timeOfDay = britishLocalTime.TimeOfDay;
         
         return timeOfDay >= _startOfDay
-               && timeOfDay <= _endOfDay
+               && timeOfDay < _endOfDay
             ? OrgStatus.Open
             : OrgStatus.Closed;
     }

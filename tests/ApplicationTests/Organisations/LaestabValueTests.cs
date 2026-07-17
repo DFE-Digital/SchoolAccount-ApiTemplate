@@ -10,7 +10,7 @@ public class LaestabValueTests
       no further test are necessary
     */
     [Fact]
-    public void Should_Split_Laestab_Into_LocalAuthorityCode_And_EstablishmentNumber()
+    public void Laestab_is_separated_into_localAuthorityCode_and_establishmentNumber_by_LaestabValue()
     {
         // arrange and act
         var laestabValue = new LaestabValue("3214567");

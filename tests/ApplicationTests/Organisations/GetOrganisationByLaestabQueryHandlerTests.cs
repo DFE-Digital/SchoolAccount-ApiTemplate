@@ -8,7 +8,7 @@ namespace ApplicationTests.Organisations;
 public class GetOrganisationByLaestabQueryHandlerTests
 {
     [Fact]
-    public async Task Handle_Should_Return_Populated_OrganisationResponse()
+    public async Task Handler_takes_a_laestab_and_returns_school_open_status_localAuthorityCode_and_establishmentNumber()
     {
         // arrange
         string laCode = "321";

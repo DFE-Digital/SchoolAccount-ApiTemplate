@@ -10,7 +10,7 @@ public class StatusCalculatorTests
     private readonly IDateTimeProvider _dateTimeProvider = Substitute.For<IDateTimeProvider>();
 
     [Fact]
-    public void GetOpenStatus_Should_Return_Open_During_Working_Hours()
+    public void Organisation_is_open_during_school_hours()
     {
         // arrange
         var eightAm = new DateTime(2026, 2, 11, 8, 1, 0, DateTimeKind.Utc);
@@ -21,9 +21,35 @@ public class StatusCalculatorTests
         // assert
         result.ShouldBe(OrgStatus.Open);
     }
+    
+    [Fact]
+    public void Organisation_is_open_at_exact_opening_time()
+    {
+        // arrange
+        var eightAm = new DateTime(2026, 2, 11, 8, 0, 0, DateTimeKind.Utc);
+        _dateTimeProvider.UtcNow.Returns(eightAm);
+        var sc = new StatusCalculator(_dateTimeProvider);
+        // act
+        OrgStatus result = sc.GetOpenStatus();
+        // assert
+        result.ShouldBe(OrgStatus.Open);
+    }
 
     [Fact]
-    public void GetOpenStatus_Should_Return_Closed_Outside_of_Working_Hours()
+    public void Organisation_is_closed_at_exact_closing_time()
+    {
+        // arrange
+        var eightAm = new DateTime(2026, 2, 11, 15, 30, 0, DateTimeKind.Utc);
+        _dateTimeProvider.UtcNow.Returns(eightAm);
+        var sc = new StatusCalculator(_dateTimeProvider);
+        // act
+        OrgStatus result = sc.GetOpenStatus();
+        // assert
+        result.ShouldBe(OrgStatus.Closed);
+    }
+
+    [Fact]
+    public void Organisation_is_closed_outside_of_school_hours()
     {
         // arrange
         var tenPmUtc = new DateTime(2026, 2, 11, 3, 31, 0, DateTimeKind.Utc);
@@ -36,7 +62,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void GetOpenStatus_Should_Return_Open_At_8_30am_BST()
+    public void Organisation_takes_into_account_daylight_savings_for_open()
     {
         // arrange
         // 8:30 AM BST = 7:30 AM UTC 
@@ -50,7 +76,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void GetOpenStatus_Should_Return_Closed_Before_8_00am_BST()
+    public void Organisation_takes_into_account_daylight_savings_for_closed()
     {
         // arrange
         // 6:59 AM UTC = 7:59 AM BST
