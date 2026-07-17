@@ -53,7 +53,7 @@ public class StatusCalculatorTests
     public void GetOpenStatus_Should_Return_Closed_Before_8_00am_BST()
     {
         // arrange
-        // 7:15 AM UTC = 8:15 AM BST
+        // 6:59 AM UTC = 7:59 AM BST
         var beforeOpeningBST = new DateTime(2026, 7, 15, 6, 59, 0, DateTimeKind.Utc);
         _dateTimeProvider.UtcNow.Returns(beforeOpeningBST);
         var sc = new StatusCalculator(_dateTimeProvider);
