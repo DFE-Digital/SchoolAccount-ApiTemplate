@@ -10,7 +10,7 @@ public class StatusCalculatorTests
     private readonly IDateTimeProvider _dateTimeProvider = Substitute.For<IDateTimeProvider>();
 
     [Fact]
-    public void Should_Return_Open_During_Working_Hours()
+    public void GetOpenStatus_Should_Return_Open_During_Working_Hours()
     {
         // arrange
         var eightAm = new DateTime(2026, 2, 11, 8, 1, 0, DateTimeKind.Utc);
@@ -23,7 +23,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Should_Return_Closed_Outside_of_Working_Hours()
+    public void GetOpenStatus_Should_Return_Closed_Outside_of_Working_Hours()
     {
         // arrange
         var tenPmUtc = new DateTime(2026, 2, 11, 3, 31, 0, DateTimeKind.Utc);
@@ -36,7 +36,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Should_Account_For_Daylight_Saving_Time_At_8_30_Am_BST()
+    public void GetOpenStatus_Should_Return_Open_At_8_30am_BST()
     {
         // arrange
         // 8:30 AM BST = 7:30 AM UTC 
@@ -50,7 +50,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Should_Be_Closed_Before_8_00_Am_BST()
+    public void GetOpenStatus_Should_Return_Closed_Before_8_00am_BST()
     {
         // arrange
         // 7:15 AM UTC = 8:15 AM BST
