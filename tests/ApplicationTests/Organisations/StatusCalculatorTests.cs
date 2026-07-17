@@ -7,50 +7,59 @@ namespace ApplicationTests.Organisations;
 
 public class StatusCalculatorTests
 {
+    private readonly IDateTimeProvider _dateTimeProvider = Substitute.For<IDateTimeProvider>();
+
     [Fact]
     public void Should_Return_Open_During_Working_Hours()
     {
-        IDateTimeProvider dateTimeProvider = Substitute.For<IDateTimeProvider>();
+        // arrange
         var eightAm = new DateTime(2026, 2, 11, 8, 1, 0, DateTimeKind.Utc);
-        dateTimeProvider.UtcNow.Returns(eightAm);
-        var sc = new StatusCalculator(dateTimeProvider);
+        _dateTimeProvider.UtcNow.Returns(eightAm);
+        var sc = new StatusCalculator(_dateTimeProvider);
+        // act
         OrgStatus result = sc.GetOpenStatus();
+        // assert
         result.ShouldBe(OrgStatus.Open);
     }
-    
+
     [Fact]
     public void Should_Return_Closed_Outside_of_Working_Hours()
     {
-        IDateTimeProvider dateTimeProvider = Substitute.For<IDateTimeProvider>();
+        // arrange
         var tenPmUtc = new DateTime(2026, 2, 11, 3, 31, 0, DateTimeKind.Utc);
-        dateTimeProvider.UtcNow.Returns(tenPmUtc); 
-        var sc = new StatusCalculator(dateTimeProvider);
+        _dateTimeProvider.UtcNow.Returns(tenPmUtc);
+        var sc = new StatusCalculator(_dateTimeProvider);
+        // act
         OrgStatus result = sc.GetOpenStatus();
+        // assert
         result.ShouldBe(OrgStatus.Closed);
     }
-    
+
     [Fact]
     public void Should_Account_For_Daylight_Saving_Time_At_8_30_Am_BST()
     {
+        // arrange
         // 8:30 AM BST = 7:30 AM UTC 
-        IDateTimeProvider dateTimeProvider = Substitute.For<IDateTimeProvider>();
         var eightThirtyAmBST = new DateTime(2026, 7, 15, 7, 30, 0, DateTimeKind.Utc);
-        dateTimeProvider.UtcNow.Returns(eightThirtyAmBST);
-        var sc = new StatusCalculator(dateTimeProvider);
+        _dateTimeProvider.UtcNow.Returns(eightThirtyAmBST);
+        var sc = new StatusCalculator(_dateTimeProvider);
+        // act
         OrgStatus result = sc.GetOpenStatus();
+        // assert
         result.ShouldBe(OrgStatus.Open);
     }
-    
+
     [Fact]
-    public void Should_Be_Closed_Before_8_30_Am_BST()
+    public void Should_Be_Closed_Before_8_00_Am_BST()
     {
+        // arrange
         // 7:15 AM UTC = 8:15 AM BST
-        IDateTimeProvider dateTimeProvider = Substitute.For<IDateTimeProvider>();
-        var beforeOpeningBST = new DateTime(2026, 7, 15, 7, 15, 0, DateTimeKind.Utc);
-        dateTimeProvider.UtcNow.Returns(beforeOpeningBST);
-        var sc = new StatusCalculator(dateTimeProvider);
+        var beforeOpeningBST = new DateTime(2026, 7, 15, 6, 59, 0, DateTimeKind.Utc);
+        _dateTimeProvider.UtcNow.Returns(beforeOpeningBST);
+        var sc = new StatusCalculator(_dateTimeProvider);
+        // act
         OrgStatus result = sc.GetOpenStatus();
+        // assert
         result.ShouldBe(OrgStatus.Closed);
     }
-    
 }

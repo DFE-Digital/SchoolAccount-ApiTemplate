@@ -5,7 +5,7 @@ using SharedKernel;
 namespace Application.Organisations.GetByLaestab;
 
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.AllConstructors)]
-internal sealed class GetOrganisationByLaestabQueryHandler(IDateTimeProvider dateTimeProvider)
+public sealed class GetOrganisationByLaestabQueryHandler(IDateTimeProvider dateTimeProvider)
     : IQueryHandler<GetOrganisationByLaestabQuery, OrganisationResponse>
 {
     public async Task<Result<OrganisationResponse>> Handle(GetOrganisationByLaestabQuery query,
