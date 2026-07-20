@@ -53,13 +53,13 @@ Use the .NET CLI to build or test the solution.
 - To build locally:
 
   ```bash
-  dotnet build
+  dotnet build SchoolAccount.ApiTemplate.slnx
   ```
 
 - To run all tests:
 
   ```bash
-  dotnet test
+  dotnet test **/*Tests/*.csproj
   ```
 
 Architecture tests under `tests/ArchitectureTests` enforce the clean architecture dependency rules between layers.
