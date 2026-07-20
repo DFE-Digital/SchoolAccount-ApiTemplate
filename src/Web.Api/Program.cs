@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Application;
 using HealthChecks.UI.Client;
 using Infrastructure;
@@ -18,7 +19,6 @@ builder.Services
     .AddInfrastructure();
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
-
 WebApplication app = builder.Build();
 
 app.MapEndpoints();
