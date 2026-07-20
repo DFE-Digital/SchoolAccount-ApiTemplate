@@ -21,11 +21,8 @@ public class StatusCalculatorTests
         // Arrange
         var nineAm = new DateTime(2026, 2, 11, 9, 0, 0, DateTimeKind.Utc);
 
-        // Act
-        OrgStatus result = GetStatusAt(nineAm);
-
-        // Assert
-        result.ShouldBe(OrgStatus.Open);
+        // Act & Assert
+        GetStatusAt(nineAm).ShouldBe(OrgStatus.Open);
     }
 
     [Fact]
@@ -34,11 +31,8 @@ public class StatusCalculatorTests
         // Arrange
         var exactOpeningTime = new DateTime(2026, 2, 11, 8, 0, 0, DateTimeKind.Utc);
 
-        // Act
-        OrgStatus result = GetStatusAt(exactOpeningTime);
-
-        // Assert
-        result.ShouldBe(OrgStatus.Open);
+        // Act & Assert
+        GetStatusAt(exactOpeningTime).ShouldBe(OrgStatus.Open);
     }
 
     [Fact]
@@ -47,11 +41,8 @@ public class StatusCalculatorTests
         // Arrange
         var exactClosingTime = new DateTime(2026, 2, 11, 15, 30, 0, DateTimeKind.Utc);
 
-        // Act
-        OrgStatus result = GetStatusAt(exactClosingTime);
-
-        // Assert
-        result.ShouldBe(OrgStatus.Closed);
+        // Act & Assert
+        GetStatusAt(exactClosingTime).ShouldBe(OrgStatus.Closed);
     }
 
     [Fact]
@@ -60,11 +51,8 @@ public class StatusCalculatorTests
         // Arrange
         var threeThirtyOnePmGMT = new DateTime(2026, 2, 11, 3, 31, 0, DateTimeKind.Utc);
 
-        // Act
-        OrgStatus result = GetStatusAt(threeThirtyOnePmGMT);
-
-        // Assert
-        result.ShouldBe(OrgStatus.Closed);
+        // Act & Assert
+        GetStatusAt(threeThirtyOnePmGMT).ShouldBe(OrgStatus.Closed);
     }
 
     [Fact]
@@ -74,11 +62,8 @@ public class StatusCalculatorTests
         // 8:30 AM BST = 7:30 AM UTC
         var eightThirtyAmBST = new DateTime(2026, 7, 15, 7, 30, 0, DateTimeKind.Utc);
 
-        // Act
-        OrgStatus result = GetStatusAt(eightThirtyAmBST);
-
-        // Assert
-        result.ShouldBe(OrgStatus.Open);
+        // Act & Assert
+        GetStatusAt(eightThirtyAmBST).ShouldBe(OrgStatus.Open);
     }
 
     [Fact]
@@ -88,10 +73,7 @@ public class StatusCalculatorTests
         // 6:59 AM UTC = 7:59 AM BST
         var beforeOpeningBST = new DateTime(2026, 7, 15, 6, 59, 0, DateTimeKind.Utc);
 
-        // Act
-        OrgStatus result = GetStatusAt(beforeOpeningBST);
-
-        // Assert
-        result.ShouldBe(OrgStatus.Closed);
+        // Act & Assert
+        GetStatusAt(beforeOpeningBST).ShouldBe(OrgStatus.Closed);
     }
 }
