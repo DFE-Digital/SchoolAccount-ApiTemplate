@@ -46,6 +46,26 @@ public class StatusCalculatorTests
     }
 
     [Fact]
+    public void Organisation_is_closed_one_minute_before_opening()
+    {
+        // Arrange
+        var sevenFiftyNineAm = new DateTime(2026, 2, 11, 7, 59, 0, DateTimeKind.Utc);
+
+        // Act & Assert
+        GetStatusAt(sevenFiftyNineAm).ShouldBe(OrgStatus.Closed);
+    }
+
+    [Fact]
+    public void Organisation_is_open_one_minute_before_closing()
+    {
+        // Arrange
+        var threeTwentyNinePm = new DateTime(2026, 2, 11, 15, 29, 0, DateTimeKind.Utc);
+
+        // Act & Assert
+        GetStatusAt(threeTwentyNinePm).ShouldBe(OrgStatus.Open);
+    }
+
+    [Fact]
     public void Organisation_is_closed_outside_of_school_hours()
     {
         // Arrange
