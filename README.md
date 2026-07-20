@@ -7,6 +7,8 @@ from scratch.
 
 ## Documentation
 
+- [Clean Architecture](docs/clean-architecture.md) - layers, dependency rules, and code organisation
+
 Architecture decisions are recorded as ADRs in the [decisions](decisions) folder:
 
 - [Use Markdown Architectural Decision Records](decisions/0001-record-architecture-decisions.md) - why and how we record decisions

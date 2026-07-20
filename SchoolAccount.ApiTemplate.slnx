@@ -5,6 +5,9 @@
     <File Path="decisions\0002-use-clean-architecture.md" />
     <File Path="decisions\0003-strip-imported-template-to-minimal-core.md" />
   </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs\clean-architecture.md" />
+  </Folder>
   <Folder Name="/solution/">
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props" />
