@@ -12,14 +12,29 @@ public class LaestabValueTests
     [Fact]
     public void Laestab_is_separated_into_localAuthorityCode_and_establishmentNumber_by_LaestabValue()
     {
-        // arrange
-        string localAuthorityCode = "321";
-        string establishmentNo = "4567";
-        string laestab = localAuthorityCode + establishmentNo;
-        // act
+        // Arrange
+        const string localAuthorityCode = "321";
+        const string establishmentNo = "4567";
+        const string laestab = localAuthorityCode + establishmentNo;
+        
+        // Act
         var laestabValue = new LaestabValue(laestab);
-        // assert
+        
+        // Assert
         laestabValue.LocalAuthorityCode.ShouldBe(localAuthorityCode);
         laestabValue.EstablishmentNo.ShouldBe(establishmentNo);
+    }
+
+    [Fact]
+    public void Throw_an_exception_when_the_laestab_value_is_not_seven_characters_long()
+    {
+        // Arrange
+        const string laestabValue = "123456";
+
+        // Act
+        ArgumentException exception = Should.Throw<ArgumentException>(() => new LaestabValue(laestabValue));
+        
+        // Assert 
+        exception.Message.ShouldBe("Laestab must be 7 characters long");
     }
 }
