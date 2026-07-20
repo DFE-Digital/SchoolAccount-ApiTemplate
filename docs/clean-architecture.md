@@ -74,9 +74,7 @@ The Application layer depends on Domain. It never depends on Infrastructure or P
 Implements the abstractions defined by the Application layer. Everything that talks to the outside world lives here.
 
 Contains:
-- **EF Core DbContext and entity configurations**
-- **Repository implementations**
-- **Migrations**
+- **Database access and configuration**
 - **External service clients** (email, blob storage, message brokers)
 - **Background jobs**
 - **Authentication integrations**
@@ -101,8 +99,8 @@ The Presentation layer depends on Application (to send commands/queries) but sho
 
 ```
 Domain ← Application ← Infrastructure
-                    ↑
-              Presentation
+              ↑
+         Presentation
 ```
 
 The arrows show the direction of **allowed** dependencies. No arrow ever points toward Infrastructure from the inner layers.
@@ -113,13 +111,13 @@ These rules are enforced by the tests in `tests/ArchitectureTests`.
 
 ## How This Solution Applies Clean Architecture
 
-| Layer         | Project          |
-|---------------|------------------|
-| Domain        | `Domain`         |
-| Application   | `Application`    |
-| Infrastructure| `Infrastructure` |
-| Presentation  | `Web.Api`        |
-| Shared kernel | `SharedKernel`   |
+| Layer          | Project          |
+|----------------|------------------|
+| Domain         | `Domain`         |
+| Application    | `Application`    |
+| Infrastructure | `Infrastructure` |
+| Presentation   | `Web.Api`        |
+| Shared kernel  | `SharedKernel`   |
 
 `SharedKernel` contains primitives used across all layers (`Result<T>`, `Error`, `ValidationError`, `IDateTimeProvider`)
 and sits outside the ring model - it has no dependencies itself and can be referenced by any layer.
