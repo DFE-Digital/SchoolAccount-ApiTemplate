@@ -58,8 +58,8 @@ public class StatusCalculatorTests
     public void Organisation_is_closed_outside_of_school_hours()
     {
         // Arrange
-        var tenPm = new DateTime(2026, 2, 11, 3, 31, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(tenPm);
+        var threeThirtyOnePmGMT = new DateTime(2026, 2, 11, 3, 31, 0, DateTimeKind.Utc);
+        _dateTimeProvider.UtcNow.Returns(threeThirtyOnePmGMT);
         var sc = new StatusCalculator(_dateTimeProvider);
         
         // Act
