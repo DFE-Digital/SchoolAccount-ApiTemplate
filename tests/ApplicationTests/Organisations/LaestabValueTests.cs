@@ -12,10 +12,14 @@ public class LaestabValueTests
     [Fact]
     public void Laestab_is_separated_into_localAuthorityCode_and_establishmentNumber_by_LaestabValue()
     {
-        // arrange and act
-        var laestabValue = new LaestabValue("3214567");
+        // arrange
+        string localAuthorityCode = "321";
+        string establishmentNo = "4567";
+        string laestab = localAuthorityCode + establishmentNo;
+        // act
+        var laestabValue = new LaestabValue(laestab);
         // assert
-        laestabValue.LocalAuthorityCode.ShouldBe("321");
-        laestabValue.EstablishmentNumber.ShouldBe("4567");
+        laestabValue.LocalAuthorityCode.ShouldBe(localAuthorityCode);
+        laestabValue.EstablishmentNo.ShouldBe(establishmentNo);
     }
 }

@@ -13,8 +13,8 @@ public class StatusCalculatorTests
     public void Organisation_is_open_during_school_hours()
     {
         // arrange
-        var eightAm = new DateTime(2026, 2, 11, 8, 1, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(eightAm);
+        var nineAm = new DateTime(2026, 2, 11, 9, 0, 0, DateTimeKind.Utc);
+        _dateTimeProvider.UtcNow.Returns(nineAm);
         var sc = new StatusCalculator(_dateTimeProvider);
         // act
         OrgStatus result = sc.GetOpenStatus();
@@ -26,8 +26,8 @@ public class StatusCalculatorTests
     public void Organisation_is_open_at_exact_opening_time()
     {
         // arrange
-        var eightAm = new DateTime(2026, 2, 11, 8, 0, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(eightAm);
+        var exactOpeningTime = new DateTime(2026, 2, 11, 8, 0, 0, DateTimeKind.Utc);
+        _dateTimeProvider.UtcNow.Returns(exactOpeningTime);
         var sc = new StatusCalculator(_dateTimeProvider);
         // act
         OrgStatus result = sc.GetOpenStatus();
@@ -39,8 +39,8 @@ public class StatusCalculatorTests
     public void Organisation_is_closed_at_exact_closing_time()
     {
         // arrange
-        var eightAm = new DateTime(2026, 2, 11, 15, 30, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(eightAm);
+        var exactClosingTime = new DateTime(2026, 2, 11, 15, 30, 0, DateTimeKind.Utc);
+        _dateTimeProvider.UtcNow.Returns(exactClosingTime);
         var sc = new StatusCalculator(_dateTimeProvider);
         // act
         OrgStatus result = sc.GetOpenStatus();
