@@ -9,32 +9,34 @@ public class StatusCalculatorTests
 {
     private readonly IDateTimeProvider _dateTimeProvider = Substitute.For<IDateTimeProvider>();
 
+    private OrgStatus GetStatusAt(DateTime utc)
+    {
+        _dateTimeProvider.UtcNow.Returns(utc);
+        return new StatusCalculator(_dateTimeProvider).GetOpenStatus();
+    }
+
     [Fact]
     public void Organisation_is_open_during_school_hours()
     {
         // Arrange
         var nineAm = new DateTime(2026, 2, 11, 9, 0, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(nineAm);
-        var sc = new StatusCalculator(_dateTimeProvider);
-        
+
         // Act
-        OrgStatus result = sc.GetOpenStatus();
-        
+        OrgStatus result = GetStatusAt(nineAm);
+
         // Assert
         result.ShouldBe(OrgStatus.Open);
     }
-    
+
     [Fact]
     public void Organisation_is_open_at_exact_opening_time()
     {
         // Arrange
         var exactOpeningTime = new DateTime(2026, 2, 11, 8, 0, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(exactOpeningTime);
-        var sc = new StatusCalculator(_dateTimeProvider);
-        
+
         // Act
-        OrgStatus result = sc.GetOpenStatus();
-        
+        OrgStatus result = GetStatusAt(exactOpeningTime);
+
         // Assert
         result.ShouldBe(OrgStatus.Open);
     }
@@ -44,12 +46,10 @@ public class StatusCalculatorTests
     {
         // Arrange
         var exactClosingTime = new DateTime(2026, 2, 11, 15, 30, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(exactClosingTime);
-        var sc = new StatusCalculator(_dateTimeProvider);
-        
+
         // Act
-        OrgStatus result = sc.GetOpenStatus();
-        
+        OrgStatus result = GetStatusAt(exactClosingTime);
+
         // Assert
         result.ShouldBe(OrgStatus.Closed);
     }
@@ -59,12 +59,10 @@ public class StatusCalculatorTests
     {
         // Arrange
         var threeThirtyOnePmGMT = new DateTime(2026, 2, 11, 3, 31, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(threeThirtyOnePmGMT);
-        var sc = new StatusCalculator(_dateTimeProvider);
-        
+
         // Act
-        OrgStatus result = sc.GetOpenStatus();
-        
+        OrgStatus result = GetStatusAt(threeThirtyOnePmGMT);
+
         // Assert
         result.ShouldBe(OrgStatus.Closed);
     }
@@ -73,14 +71,12 @@ public class StatusCalculatorTests
     public void Organisation_takes_into_account_daylight_savings_for_open()
     {
         // Arrange
-        // 8:30 AM BST = 7:30 AM UTC 
+        // 8:30 AM BST = 7:30 AM UTC
         var eightThirtyAmBST = new DateTime(2026, 7, 15, 7, 30, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(eightThirtyAmBST);
-        var sc = new StatusCalculator(_dateTimeProvider);
-        
+
         // Act
-        OrgStatus result = sc.GetOpenStatus();
-        
+        OrgStatus result = GetStatusAt(eightThirtyAmBST);
+
         // Assert
         result.ShouldBe(OrgStatus.Open);
     }
@@ -91,12 +87,10 @@ public class StatusCalculatorTests
         // Arrange
         // 6:59 AM UTC = 7:59 AM BST
         var beforeOpeningBST = new DateTime(2026, 7, 15, 6, 59, 0, DateTimeKind.Utc);
-        _dateTimeProvider.UtcNow.Returns(beforeOpeningBST);
-        var sc = new StatusCalculator(_dateTimeProvider);
-        
+
         // Act
-        OrgStatus result = sc.GetOpenStatus();
-        
+        OrgStatus result = GetStatusAt(beforeOpeningBST);
+
         // Assert
         result.ShouldBe(OrgStatus.Closed);
     }
