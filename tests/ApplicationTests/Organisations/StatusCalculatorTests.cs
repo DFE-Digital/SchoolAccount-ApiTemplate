@@ -96,4 +96,24 @@ public class StatusCalculatorTests
         // Act & Assert
         GetStatusAt(beforeOpeningBST).ShouldBe(OrgStatus.Closed);
     }
+
+    [Fact]
+    public void Organisation_is_closed_on_saturday_during_school_hours()
+    {
+        // Arrange
+        var saturdayNineAm = new DateTime(2026, 2, 14, 9, 0, 0, DateTimeKind.Utc);
+
+        // Act & Assert
+        GetStatusAt(saturdayNineAm).ShouldBe(OrgStatus.Closed);
+    }
+
+    [Fact]
+    public void Organisation_is_closed_on_sunday_during_school_hours()
+    {
+        // Arrange
+        var sundayNineAm = new DateTime(2026, 2, 15, 9, 0, 0, DateTimeKind.Utc);
+
+        // Act & Assert
+        GetStatusAt(sundayNineAm).ShouldBe(OrgStatus.Closed);
+    }
 }

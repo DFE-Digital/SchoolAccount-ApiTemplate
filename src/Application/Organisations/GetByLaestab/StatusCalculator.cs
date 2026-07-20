@@ -12,8 +12,13 @@ public class StatusCalculator(IDateTimeProvider dateTimeProvider)
     {
         DateTime utcNow = dateTimeProvider.UtcNow;
         DateTime britishLocalTime = TimeZoneInfo.ConvertTimeFromUtc(utcNow, BritishTimeZone);
+
+        if (britishLocalTime.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday)
+        {
+            return OrgStatus.Closed;
+        }
+
         TimeSpan timeOfDay = britishLocalTime.TimeOfDay;
-        
         return timeOfDay >= _startOfDay
                && timeOfDay < _endOfDay
             ? OrgStatus.Open
