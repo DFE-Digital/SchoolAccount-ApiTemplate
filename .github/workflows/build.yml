@@ -42,6 +42,14 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           files: "TestResults/*.trx"
+          
+      - name: Test report
+        uses: dorny/test-reporter@v3
+        if: ${{ !cancelled() }}
+        with:
+          name: Tests
+          path: "TestResults/*.trx"
+          reporter: dotnet-trx
 
       # Each test project writes its own cobertura file; merge them into one
       # report. Raise the threshold as coverage improves; it blocks the build
