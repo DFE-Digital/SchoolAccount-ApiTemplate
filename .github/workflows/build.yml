@@ -31,7 +31,25 @@ jobs:
         run: dotnet build SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
+        run: dotnet test SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build -- --report-gh --coverage --coverage-output-format cobertura --coverage-settings ${{ github.workspace }}/coverage.config
+
+      # Each test project writes its own cobertura file; merge them into one
+      # report for the job summary and threshold check.
+      - name: Merge coverage reports
+        if: ${{ !cancelled() }}
+        run: |
+          dotnet tool restore
+          dotnet reportgenerator -reports:"TestResults/*.cobertura.xml" -targetdir:TestResults/Merged -reporttypes:"Cobertura;MarkdownSummaryGithub"
+
+      - name: Write coverage job summary
+        if: ${{ !cancelled() }}
+        run: cat TestResults/Merged/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
+
+      # Raise the threshold as coverage improves; it blocks the build (and any
+      # PR that requires this check) when line coverage drops below it.
+      - name: Enforce coverage threshold
+        if: ${{ !cancelled() }}
+        run: dotnet run scripts/CoverageGate.cs -- TestResults/Merged/Cobertura.xml 15
 
       - name: Publish
         run: dotnet publish SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
