@@ -37,7 +37,7 @@ jobs:
         if: always()
         uses: actions/upload-code-coverage@v1
         with:
-          file: ./tests/*Tests/TestResults/**/*.cobertura.xml
+          file: ./tests/ApplicationTests/TestResults/*/*cobertura.xml
           language: csharp
           label: Code Coverage
 
