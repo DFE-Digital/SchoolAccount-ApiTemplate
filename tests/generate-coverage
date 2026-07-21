@@ -1,0 +1,6 @@
+rm -r ArchitectureTests/TestResults
+rm -r ApplicationTests/TestResults
+rm -r TestResults
+dotnet test --settings ./xplat.runsettings --collect:"XPlat Code Coverage" ApplicationTests/*.csproj 
+dotnet test --settings ./xplat.runsettings --collect:"XPlat Code Coverage" ArchitectureTests/*.csproj 
+reportgenerator "-reports:*Tests/TestResults/**/*.cobertura.xml" "-targetdir:TestResults/CoverageReport" -reporttypes:Html "-filefilters:-*generated.cs;-*.g.cs"
