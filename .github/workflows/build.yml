@@ -38,12 +38,10 @@ jobs:
         run: dotnet test SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build -- --report-gh --report-trx --coverage --coverage-output-format cobertura --coverage-settings ${{ github.workspace }}/coverage.config
 
       - name: Test report
-        uses: dorny/test-reporter@v3
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: ${{ !cancelled() }}
         with:
-          name: Tests
-          path: "TestResults/*.trx"
-          reporter: dotnet-trx
+          files: "TestResults/*.trx"
 
       # Each test project writes its own cobertura file; merge them into one
       # report. Raise the threshold as coverage improves; it blocks the build
