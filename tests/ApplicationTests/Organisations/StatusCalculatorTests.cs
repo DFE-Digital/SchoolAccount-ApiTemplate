@@ -16,7 +16,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Organisation_is_open_during_school_hours()
+    public void Organisation_is_open_during_school_hours_on_a_weekday()
     {
         // Arrange
         var nineAm = new DateTime(2026, 2, 11, 9, 0, 0, DateTimeKind.Utc);
@@ -26,7 +26,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Organisation_is_open_at_exact_opening_time()
+    public void Organisation_is_open_at_exact_opening_time_on_a_weekday()
     {
         // Arrange
         var exactOpeningTime = new DateTime(2026, 2, 11, 8, 0, 0, DateTimeKind.Utc);
@@ -36,7 +36,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Organisation_is_closed_at_exact_closing_time()
+    public void Organisation_is_closed_at_exact_closing_time_on_a_weekday()
     {
         // Arrange
         var exactClosingTime = new DateTime(2026, 2, 11, 15, 30, 0, DateTimeKind.Utc);
@@ -46,7 +46,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Organisation_is_closed_outside_of_school_hours()
+    public void Organisation_is_closed_outside_of_school_hours_on_a_weekday()
     {
         // Arrange
         var tenPmGMT = new DateTime(2026, 2, 11, 22, 00, 0, DateTimeKind.Utc);
@@ -56,7 +56,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Organisation_takes_into_account_daylight_savings_for_open()
+    public void Organisation_takes_into_account_daylight_savings_for_open_on_a_weekday()
     {
         // Arrange
         // 8:30 AM BST = 7:30 AM UTC
@@ -67,7 +67,7 @@ public class StatusCalculatorTests
     }
 
     [Fact]
-    public void Organisation_takes_into_account_daylight_savings_for_closed()
+    public void Organisation_takes_into_account_daylight_savings_for_closed_on_a_weekday()
     {
         // Arrange
         // 6:59 AM UTC = 7:59 AM BST
