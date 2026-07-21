@@ -49,10 +49,10 @@ public class StatusCalculatorTests
     public void Organisation_is_closed_outside_of_school_hours()
     {
         // Arrange
-        var threeThirtyOnePmGMT = new DateTime(2026, 2, 11, 3, 31, 0, DateTimeKind.Utc);
+        var tenPmGMT = new DateTime(2026, 2, 11, 22, 00, 0, DateTimeKind.Utc);
 
         // Act & Assert
-        GetStatusAt(threeThirtyOnePmGMT).ShouldBe(OrgStatus.Closed);
+        GetStatusAt(tenPmGMT).ShouldBe(OrgStatus.Closed);
     }
 
     [Fact]
