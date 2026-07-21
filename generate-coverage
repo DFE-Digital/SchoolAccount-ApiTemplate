@@ -1,0 +1,5 @@
+rm -r tests/ArchitectureTests/TestResults
+rm -r tests/ApplicationTests/TestResults
+rm -r ./TestResults
+dotnet test --settings ./tests/xplat.runsettings --collect:"XPlat Code Coverage" SchoolAccount.ApiTemplate.slnx
+reportgenerator "-reports:tests/*Tests/TestResults/**/*.cobertura.xml" "-targetdir:TestResults/CoverageReport" -reporttypes:Html "-filefilters:-*generated.cs;-*.g.cs"
