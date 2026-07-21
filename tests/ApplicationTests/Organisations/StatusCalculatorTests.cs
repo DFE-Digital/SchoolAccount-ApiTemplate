@@ -49,10 +49,10 @@ public class StatusCalculatorTests
     public void Organisation_is_closed_outside_of_school_hours_on_a_weekday()
     {
         // Arrange
-        var tenPmGMT = new DateTime(2026, 2, 11, 22, 00, 0, DateTimeKind.Utc);
+        var tenPm = new DateTime(2026, 2, 11, 22, 00, 0, DateTimeKind.Utc);
 
         // Act & Assert
-        GetStatusAt(tenPmGMT).ShouldBe(OrgStatus.Closed);
+        GetStatusAt(tenPm).ShouldBe(OrgStatus.Closed);
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class StatusCalculatorTests
     public void Organisation_takes_into_account_daylight_savings_for_closed_on_a_weekday()
     {
         // Arrange
-        // 6:59 AM UTC = 7:59 AM BST
+        // 7:59 AM BST = 6:59 AM UTC
         var beforeOpeningBST = new DateTime(2026, 7, 15, 6, 59, 0, DateTimeKind.Utc);
 
         // Act & Assert
