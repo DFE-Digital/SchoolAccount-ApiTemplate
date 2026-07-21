@@ -31,7 +31,7 @@ jobs:
         run: dotnet build SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
+        run: dotnet test --settings ./tests/xplat.runsettings --collect:"XPlat Code Coverage" SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
 
       - name: Publish
         run: dotnet publish SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
