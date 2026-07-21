@@ -34,12 +34,14 @@ jobs:
         run: dotnet test --settings ./tests/xplat.runsettings --collect:"XPlat Code Coverage" SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
 
       - name: List coverage files
-        run: ls -R ./tests/*/TestResults/*/*.cobertura.xml
+        run: |
+          ls -R ./tests/*/TestResults/*/*.cobertura.xml
+          mv ./tests/*/TestResults/*/*.cobertura.xml ./arch.cobertura.xml
       - name: Upload code coverage
         if: always()
         uses: actions/upload-code-coverage@v1
         with:
-          file: ./tests/ArchitectureTests/TestResults/*/*.cobertura.xml
+          file: ./arch.cobertura.xml
           language: csharp
           label: Code Coverage
 
