@@ -26,7 +26,7 @@ Test method names should read as a plain statement of what the system does under
 
 ```csharp
 public void Organisation_is_closed_at_exact_closing_time()
-public void Organisation_is_open_one_minute_before_closing()
+public void Organisation_takes_into_account_daylight_savings_for_open()
 ```
 
 Avoid names that describe the test mechanics (`Test_GetOpenStatus_1`) or that are so generic they provide no signal
