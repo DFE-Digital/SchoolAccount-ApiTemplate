@@ -33,7 +33,7 @@ jobs:
       - name: Test
         run: dotnet test --settings ./tests/xplat.runsettings --collect:"XPlat Code Coverage" SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build
 
-      - name List coverage files
+      - name: List coverage files
         run: ls -R ./tests/*/TestResults/*/*.cobertura.xml
 #      - name: Upload code coverage
 #        if: always()
