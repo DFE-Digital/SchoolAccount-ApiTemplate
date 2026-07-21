@@ -8,6 +8,7 @@ from scratch.
 ## Documentation
 
 - [Clean Architecture](docs/clean-architecture.md) - layers, dependency rules, and code organisation
+- [Testing Standards](docs/testing-standards.md) - conventions and practices for writing tests
 
 Architecture decisions are recorded as ADRs in the [decisions](decisions) folder:
 
