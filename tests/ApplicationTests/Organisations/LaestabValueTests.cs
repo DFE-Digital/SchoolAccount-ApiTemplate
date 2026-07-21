@@ -35,6 +35,6 @@ public class LaestabValueTests
         ArgumentException exception = Should.Throw<ArgumentException>(() => new LaestabValue(laestabValue));
         
         // Assert 
-        exception.Message.ShouldBe("Laestab must be 7 characters long");
+        exception.Message.ShouldBe("Laestab must be 7 characters long foo");
     }
 }
