@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Application.Abstractions.Messaging;
 using Application.Organisations.GetByLaestab;
 using Microsoft.AspNetCore.Mvc;
