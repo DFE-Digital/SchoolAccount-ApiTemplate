@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Application.Abstractions.Messaging;
 using Application.Organisations.GetByLaestab;
 using Microsoft.AspNetCore.Mvc;
@@ -6,17 +7,18 @@ using Microsoft.AspNetCore.TestHost;
 using NSubstitute;
 using Shouldly;
 using SharedKernel;
+using Web.Api.Endpoints;
 
 namespace IntegrationTests.EndPoints.Organisations;
 
-public class LaestabApiTests : IClassFixture<WebApplicationFactory<Program>>
+public class GetByLaestabTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
 
     private readonly IQueryHandler<GetOrganisationByLaestabQuery, OrganisationResponse> _organisationHandler =
         Substitute.For<IQueryHandler<GetOrganisationByLaestabQuery, OrganisationResponse>>();
 
-    public LaestabApiTests(WebApplicationFactory<Program> factory)
+    public GetByLaestabTests(WebApplicationFactory<Program> factory)
     {
         _client = factory.WithWebHostBuilder(builder =>
             builder.ConfigureTestServices(services =>
@@ -60,11 +62,10 @@ public class LaestabApiTests : IClassFixture<WebApplicationFactory<Program>>
     }
 
     [Fact]
-    public async Task Organisations_endpoint_should_return_ProblemDetails_for_invalid_laestab()
+    public async Task Organisations_endpoint_should_return_400_error_and_validation_errors_for_invalid_laestab()
     {
         // Arrange
         string invalidLaestab = "98765";
-
 
         // Act
         HttpResponseMessage response =
@@ -76,5 +77,9 @@ public class LaestabApiTests : IClassFixture<WebApplicationFactory<Program>>
             await response.Content.ReadFromJsonAsync<ProblemDetails>(CancellationToken.None);
         problemDetails.ShouldNotBeNull();
         problemDetails.Title.ShouldBe("One or more validation errors occurred.");
+
+        var errorReader = new ProblemDetailsErrorReader(problemDetails);
+        string errorMessage = "LAESTAB identifiers are 7 character numeric only values in the format 1234567";
+        errorReader.HasErrorMessage("Laestab", errorMessage).ShouldBeTrue();
     }
 }
