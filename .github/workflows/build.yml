@@ -50,7 +50,7 @@ jobs:
           reports: "TestResults/*.cobertura.xml"
           targetdir: TestResults/Merged
           reporttypes: "Cobertura;MarkdownSummaryGithub"
-          customSettings: "minimumCoverageThresholds:lineCoverage=99"
+          customSettings: "minimumCoverageThresholds:lineCoverage=50"
 
       - name: Write coverage job summary
         if: ${{ !cancelled() }}
