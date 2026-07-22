@@ -11,14 +11,20 @@ public class ProblemDetailsErrorReader
     {
         if (problemDetails.Extensions.TryGetValue("errors", out object? errors) && errors is JsonElement jsonElement)
         {
-            _errorDict = JsonSerializer.Deserialize<Dictionary<string, string[]>>(
-                jsonElement.GetRawText());
+            try
+            {
+                _errorDict = JsonSerializer.Deserialize<Dictionary<string, string[]>>(
+                    jsonElement.GetRawText());
+            }
+            catch
+            {
+                // ignore error
+            }
         }
     }
 
     public bool HasErrorMessage(string key, string errorMessage)
     {
-        return _errorDict != null && _errorDict.ContainsKey(key) &&
-               _errorDict[key].Any(e => e.Contains(errorMessage));
+        return _errorDict?.TryGetValue(key, out string[]? messages) != null && messages.Contains(errorMessage);
     }
 }
