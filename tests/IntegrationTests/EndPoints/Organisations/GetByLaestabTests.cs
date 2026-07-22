@@ -30,7 +30,7 @@ public class GetByLaestabTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task
-        Organisations_endpoint_should_return_localAuthorityCode_EstablishmentNo_and_status_as_a_string_for_valid_laestab()
+        Organisations_endpoint_should_return_localAuthorityCode_establishmentNo_and_status_as_a_string_for_valid_laestab()
     {
         // Arrange
         string localAuthorityCode = "987";
@@ -53,8 +53,10 @@ public class GetByLaestabTests : IClassFixture<WebApplicationFactory<Program>>
 
         // Assert
         response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        
         ClientOrganisationResponse? result =
             await response.Content.ReadFromJsonAsync<ClientOrganisationResponse>(CancellationToken.None);
+        
         result.ShouldNotBeNull();
         result.EstablishmentNo.ShouldBe(stubbedOrganisationResponse.EstablishmentNo);
         result.LocalAuthorityCode.ShouldBe(stubbedOrganisationResponse.LocalAuthorityCode);
@@ -73,6 +75,7 @@ public class GetByLaestabTests : IClassFixture<WebApplicationFactory<Program>>
 
         // Assert
         response.StatusCode.ShouldBe(System.Net.HttpStatusCode.BadRequest);
+        
         ProblemDetails? problemDetails =
             await response.Content.ReadFromJsonAsync<ProblemDetails>(CancellationToken.None);
         problemDetails.ShouldNotBeNull();
