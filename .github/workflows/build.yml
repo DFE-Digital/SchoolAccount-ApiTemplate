@@ -37,19 +37,11 @@ jobs:
       - name: Test
         run: dotnet test SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore --no-build -- --report-gh --report-trx --coverage --coverage-output-format cobertura --coverage-settings ${{ github.workspace }}/coverage.config
 
-#      - name: Test report
-#        uses: EnricoMi/publish-unit-test-result-action@v2
-#        if: ${{ !cancelled() }}
-#        with:
-#          files: "TestResults/*.trx"
-#          
-#      - name: Test report
-#        uses: dorny/test-reporter@v3
-#        if: ${{ !cancelled() }}
-#        with:
-#          name: Tests
-#          path: "TestResults/*.trx"
-#          reporter: dotnet-trx
+      - name: Test report
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: ${{ !cancelled() }}
+        with:
+          files: "TestResults/*.trx"
 
       # Each test project writes its own cobertura file; merge them into one
       # report. Raise the threshold as coverage improves; it blocks the build
@@ -58,7 +50,7 @@ jobs:
         if: ${{ !cancelled() }}
         run: |
           dotnet tool restore
-          dotnet reportgenerator -reports:"TestResults/*.cobertura.xml" -targetdir:TestResults/Merged -reporttypes:"Cobertura;MarkdownSummaryGithub" /minimumCoverageThresholds:lineCoverage=15
+          dotnet reportgenerator -reports:"TestResults/*.cobertura.xml" -targetdir:TestResults/Merged -reporttypes:"Cobertura;MarkdownSummaryGithub" /minimumCoverageThresholds:lineCoverage=99
 
       - name: Write coverage job summary
         if: ${{ !cancelled() }}
