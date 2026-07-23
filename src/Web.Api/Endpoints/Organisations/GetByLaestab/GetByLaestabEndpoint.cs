@@ -25,7 +25,7 @@ internal sealed class GetByLaestabEndpoint : IEndpoint
             })
             .WithName("GetByLaestab")
             .WithSummary("Get organisation details")
-            .WithDescription("Retrieves the details and open status of an organisation based on the provided LAESTAB")
+            .WithDescription("Retrieves the details and open status of an organisation for the provided LAESTAB")
             .Produces<OrganisationResponse>()
             .ProducesValidationProblem()
             .ProducesProblem(StatusCodes.Status500InternalServerError)
