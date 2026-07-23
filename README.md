@@ -16,6 +16,7 @@ Architecture decisions are recorded as ADRs in the [decisions](decisions) folder
 - [Use Markdown Architectural Decision Records](decisions/0001-record-architecture-decisions.md) - why and how we record decisions
 - [Structure the solution using clean architecture](decisions/0002-use-clean-architecture.md) - layers, dependency rules, and code organisation
 - [Strip the imported template to a minimal core](decisions/0003-strip-imported-template-to-minimal-core.md) - what was removed from the original template and why
+- [Run tests on the Microsoft Testing Platform](decisions/0005-microsoft-testing-platform-and-ci-reporting.md) - testing platform and how results and coverage are reported in CI
 
 New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
@@ -65,6 +66,26 @@ Use the .NET CLI to build or test the solution.
   ```
 
 Architecture tests under `tests/ArchitectureTests` enforce the clean architecture dependency rules between layers.
+
+### Code Coverage
+
+The [build workflow](.github/workflows/build.yml) collects code coverage on every run, posts a summary to the pull
+request, and fails the build if line coverage drops below the minimum threshold. Which files are included is controlled
+by [coverage.config](coverage.config).
+
+To generate the same report locally, run [coverage.sh](coverage.sh) from the repository root:
+
+```bash
+./coverage.sh
+```
+
+The script runs all tests with coverage enabled, merges the per-project results with ReportGenerator, and writes an
+HTML report to `TestResults/CoverageReport/index.html`. Pass `--open` to open the report in your browser when it
+finishes:
+
+```bash
+./coverage.sh --open
+```
 
 ## Architecture
 
