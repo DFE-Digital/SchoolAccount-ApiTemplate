@@ -42,6 +42,15 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           files: "TestResults/*.trx"
+          
+      - name: Test report
+        uses: dorny/test-reporter@v3
+        if: ${{ !cancelled() }}
+        with:
+          name: Tests
+          path: "TestResults/*.trx"
+          reporter: dotnet-trx
+          use-actions-summary: 'true'
 
       - name: Merge coverage reports and enforce threshold
         if: ${{ !cancelled() }}
