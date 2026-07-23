@@ -4,6 +4,7 @@
     <File Path="decisions\0001-record-architecture-decisions.md" />
     <File Path="decisions\0002-use-clean-architecture.md" />
     <File Path="decisions\0003-strip-imported-template-to-minimal-core.md" />
+    <File Path="decisions\0004-microsoft-testing-platform-and-ci-reporting.md" />
   </Folder>
   <Folder Name="/docs/">
     <File Path="docs\clean-architecture.md" />

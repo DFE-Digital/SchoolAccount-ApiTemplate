@@ -16,7 +16,7 @@ Architecture decisions are recorded as ADRs in the [decisions](decisions) folder
 - [Use Markdown Architectural Decision Records](decisions/0001-record-architecture-decisions.md) - why and how we record decisions
 - [Structure the solution using clean architecture](decisions/0002-use-clean-architecture.md) - layers, dependency rules, and code organisation
 - [Strip the imported template to a minimal core](decisions/0003-strip-imported-template-to-minimal-core.md) - what was removed from the original template and why
-- [Run tests on the Microsoft Testing Platform](decisions/0005-microsoft-testing-platform-and-ci-reporting.md) - testing platform and how results and coverage are reported in CI
+- [Run tests on the Microsoft Testing Platform](decisions/0004-microsoft-testing-platform-and-ci-reporting.md) - testing platform and how results and coverage are reported in CI
 
 New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
