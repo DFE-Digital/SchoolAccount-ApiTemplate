@@ -23,8 +23,12 @@ internal sealed class GetByLaestabEndpoint : IEndpoint
 
                 return result.Match(Results.Ok, CustomResults.Problem);
             })
+            .WithName("GetByLaestab")
             .WithSummary("Get organisation details")
             .WithDescription("Retrieves the details and open status of an organisation based on the provided LAESTAB")
+            .Produces<OrganisationResponse>()
+            .ProducesValidationProblem()
+            .ProducesProblem(StatusCodes.Status500InternalServerError)
             .WithTags(Tags.Organisations);
     }
 }
