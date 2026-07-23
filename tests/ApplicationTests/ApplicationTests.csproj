@@ -10,7 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
-      <PackageReference Include="GitHubActionsTestLogger" />
+      <PackageReference Include="Microsoft.Testing.Extensions.GitHubActionsReport" />
       <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
       <PackageReference Include="NSubstitute" />
       <PackageReference Include="Shouldly" />

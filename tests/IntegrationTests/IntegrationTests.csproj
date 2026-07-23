@@ -14,7 +14,7 @@
         <PackageReference Include="Shouldly" />
         <PackageReference Include="xunit.v3.mtp-v2" />
         <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
-        <PackageReference Include="GitHubActionsTestLogger" />
+        <PackageReference Include="Microsoft.Testing.Extensions.GitHubActionsReport" />
         <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
     </ItemGroup>
 
