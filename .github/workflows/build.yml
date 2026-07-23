@@ -11,6 +11,7 @@ on:
 
 env:
   DOTNET_VERSION: "10.x"
+  MIN_LINE_COVERAGE: "50"
 
 jobs:
   build:
@@ -50,7 +51,7 @@ jobs:
           reports: "TestResults/*.cobertura.xml"
           targetdir: TestResults/Merged
           reporttypes: "Cobertura;MarkdownSummaryGithub"
-          customSettings: "minimumCoverageThresholds:lineCoverage=50"
+          customSettings: "minimumCoverageThresholds:lineCoverage=${{ env.MIN_LINE_COVERAGE }}"
 
       - name: Write coverage job summary
         if: ${{ !cancelled() }}

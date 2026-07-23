@@ -70,10 +70,9 @@ Architecture tests under `tests/ArchitectureTests` enforce the clean architectur
 ### Code Coverage
 
 The [build workflow](.github/workflows/build.yml) collects code coverage on every run, posts a summary to the pull
-request, and fails the build if line coverage drops below the minimum threshold. The threshold is defined in the
-`minimumCoverageThresholds` setting of the "Merge coverage reports and enforce threshold" step in
-[build.yml](.github/workflows/build.yml). Which files are included is controlled by
-[coverage.config](coverage.config).
+request, and fails the build if line coverage drops below the minimum threshold. The threshold is defined by the
+`MIN_LINE_COVERAGE` variable at the top of [build.yml](.github/workflows/build.yml). Which files are included is
+controlled by [coverage.config](coverage.config).
 
 To generate the same report locally, run [coverage.sh](coverage.sh) from the repository root:
 
