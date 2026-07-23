@@ -81,7 +81,7 @@ public class GetByLaestabTests : IClassFixture<WebApplicationFactory<Program>>
         problemDetails.Title.ShouldBe("One or more validation errors occurred.");
 
         var errorReader = new ProblemDetailsErrorReader(problemDetails);
-        string errorMessage = "LAESTAB identifiers are 7 character numeric only values in the format 1234567";
+        string errorMessage = "LAESTAB identifiers are 7 character numeric only values in the format 1234567 foo";
         errorReader.HasErrorMessage("Laestab", errorMessage).ShouldBeTrue();
     }
 }
