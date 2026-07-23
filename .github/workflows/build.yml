@@ -44,6 +44,7 @@ jobs:
 #          files: "TestResults/*.trx"
           
       - name: Test report
+        id: test-report
         uses: dorny/test-reporter@v3
         if: ${{ !cancelled() }}
         with:
@@ -51,7 +52,14 @@ jobs:
           path: "TestResults/*.trx"
           reporter: dotnet-trx
           use-actions-summary: 'true'
-          list-tests: 'failed'
+          list-tests: 'failed'          
+
+      - name: Add test results comment to PR
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: test-results
+          path: ${{ steps.test-report.outputs.summary_file }}
 
       - name: Merge coverage reports and enforce threshold
         if: ${{ !cancelled() }}
@@ -70,6 +78,7 @@ jobs:
         if: ${{ !cancelled() && github.event_name == 'pull_request' }}
         uses: marocchino/sticky-pull-request-comment@v3
         with:
+          header: coverage
           path: TestResults/Merged/SummaryGithub.md
 
       - name: Publish
