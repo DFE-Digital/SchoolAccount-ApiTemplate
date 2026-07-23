@@ -10,6 +10,7 @@ from scratch.
 - [Clean Architecture](docs/clean-architecture.md) - layers, dependency rules, and code organisation
 - [Testing Standards](docs/testing-standards.md) - conventions and practices for writing tests
 - [Integration Testing](docs/integration-testing.md) - guidance on integration testing of the API endpoints
+- [Open API Documentation](docs/open-api-documentation.md) - guidance on adding Open API documentation to endpoints
 
 Architecture decisions are recorded as ADRs in the [decisions](decisions) folder:
 
