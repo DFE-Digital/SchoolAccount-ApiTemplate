@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudio,rider,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,rider,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/rider,visualstudio,visualstudiocode,osx
+# Edit at https://www.toptal.com/developers/gitignore?templates=rider,visualstudio,visualstudiocode,osx
 
 ### Rider ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -494,7 +494,7 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudio,rider,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/rider,visualstudio,visualstudiocode,osx
 
 # Roslyn language server runfile-discovery cache (written to workspace root from the devcontainer)
 /dotnet/
