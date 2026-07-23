@@ -10,13 +10,17 @@ decision-makers: Paul Custance
 
 The template initially ran tests through the Visual Studio Test Platform
 (VSTest), the long-standing default for `dotnet test`. Microsoft has since
-introduced the Microsoft Testing Platform (MTP) as its successor, and raw test
-output is of little use on its own: without further processing a pull request
-shows only a pass/fail build status, with no view of which tests ran, what
-failed, or how coverage changed. Which testing platform should the template
-run on, and how do we surface test results and code coverage on every pull
-request, with an enforced minimum coverage threshold, without taking on
-licensing costs?
+introduced the Microsoft Testing Platform (MTP) as its successor, so the
+template has to pick between the two.
+
+Whichever platform runs the tests, its raw output is of little use on its
+own. Without further processing, a pull request shows only a pass/fail build
+status. Reviewers get no view of which tests ran, what failed, or how
+coverage changed.
+
+Two questions follow. Which testing platform should the template run on? And
+how do we surface test results and code coverage on every pull request, with
+an enforced minimum coverage threshold, without taking on licensing costs?
 
 ## Decision Drivers
 
