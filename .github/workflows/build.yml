@@ -51,6 +51,7 @@ jobs:
           path: "TestResults/*.trx"
           reporter: dotnet-trx
           use-actions-summary: 'true'
+          list-tests: 'failed'
 
       - name: Merge coverage reports and enforce threshold
         if: ${{ !cancelled() }}
