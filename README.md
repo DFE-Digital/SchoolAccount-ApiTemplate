@@ -85,8 +85,11 @@ dotnet csharpier format .
 ```
 
 A pre-commit hook in [.githooks](.githooks) blocks commits containing unformatted C# files; [init.sh](init.sh)
-enables it and restores the tools on a fresh clone. Plugins are available for Rider, Visual Studio, and VS Code to
-format on save. See [Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) for the reasoning.
+enables it and restores the tools on a fresh clone. To format on save, install the
+[Rider plugin](https://plugins.jetbrains.com/plugin/18243-csharpier) or the
+[VS Code extension](https://marketplace.visualstudio.com/items?itemName=csharpier.csharpier-vscode); the
+[editors documentation](https://csharpier.com/docs/Editors) covers setup for these and other IDEs. See
+[Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) for the reasoning.
 
 ### Code Coverage
 
