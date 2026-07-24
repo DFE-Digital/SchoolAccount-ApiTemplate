@@ -84,8 +84,9 @@ Code is formatted with [CSharpier](https://csharpier.com/), installed as a local
 dotnet csharpier format .
 ```
 
-A pre-commit hook in [.githooks](.githooks) blocks commits containing unformatted C# files; [init.sh](init.sh)
-enables it and restores the tools on a fresh clone. To format on save, install the
+A pre-commit hook, managed by [Husky.NET](https://alirezanet.github.io/Husky.Net/) and configured in
+[.husky/task-runner.json](.husky/task-runner.json), formats staged C# files automatically before each commit;
+[init.sh](init.sh) installs it and restores the tools on a fresh clone. To format on save, install the
 [Rider plugin](https://plugins.jetbrains.com/plugin/18243-csharpier) or the
 [VS Code extension](https://marketplace.visualstudio.com/items?itemName=csharpier.csharpier-vscode); the
 [editors documentation](https://csharpier.com/docs/Editors) covers setup for these and other IDEs. See
