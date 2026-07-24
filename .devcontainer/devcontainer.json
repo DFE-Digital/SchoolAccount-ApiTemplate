@@ -26,7 +26,8 @@
   "shutdownAction": "none",
   "customizations": {
     "jetbrains": {
-      "backend": "Rider"
+      "backend": "Rider",
+      "plugins": ["nsubstitutecomplete-rider"]
     },
     "vscode": {
       "extensions": ["humao.rest-client"]

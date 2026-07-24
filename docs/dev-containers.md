@@ -14,7 +14,11 @@ it up on your host machine.
 - In VS Code, extensions listed under `customizations.vscode.extensions` in
   [devcontainer.json](../.devcontainer/devcontainer.json) install automatically on first connect. Currently just
   [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) for running the `.http` files.
-  Add more extension IDs to that array as needed; it doesn't apply to Rider, which manages its own plugins.
+  Add more extension IDs to that array as needed.
+- In Rider, plugins listed under `customizations.jetbrains.plugins` in the same file install automatically too.
+  Currently just [NSubstituteComplete](https://plugins.jetbrains.com/plugin/15798-nsubstitutecomplete), for
+  autocomplete and quick-fixes when writing NSubstitute mocks. Add more plugin IDs to that array as needed; find a
+  plugin's ID in its `plugin.xml` on the marketplace page, not the numeric page URL.
 
 ## Prerequisites
 
