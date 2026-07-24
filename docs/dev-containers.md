@@ -11,6 +11,10 @@ it up on your host machine.
 - `seq` started alongside it, so logs are available the same way they are with `docker compose up`.
 - Port `5100` (the API) and Seq's UI port forwarded automatically.
 - `dotnet restore` run once as the container is created (`postCreateCommand`).
+- In VS Code, extensions listed under `customizations.vscode.extensions` in
+  [devcontainer.json](../.devcontainer/devcontainer.json) install automatically on first connect. Currently just
+  [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) for running the `.http` files.
+  Add more extension IDs to that array as needed; it doesn't apply to Rider, which manages its own plugins.
 
 ## Prerequisites
 

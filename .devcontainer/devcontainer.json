@@ -27,6 +27,9 @@
   "customizations": {
     "jetbrains": {
       "backend": "Rider"
+    },
+    "vscode": {
+      "extensions": ["humao.rest-client"]
     }
   }
 }
