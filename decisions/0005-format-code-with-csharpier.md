@@ -64,7 +64,7 @@ is excluded via [.csharpierignore](../.csharpierignore).
 * Bad, because the initial repository-wide reformat touches most files,
   adding noise to `git blame` around the adoption commit.
 * Neutral, because CSharpier only covers formatting; code-quality rules
-  remain the job of the existing analyzers and `.editorconfig`.
+  remain the job of the existing analysers and `.editorconfig`.
 
 ### Confirmation
 
@@ -113,7 +113,7 @@ The status quo: `.editorconfig` plus whatever each IDE does.
 
 ### StyleCop.Analyzers
 
-Style analyzers that report violations as build warnings or errors.
+Style analysers that report violations as build warnings or errors.
 
 * Good, because enforcement happens in the compiler with no separate step.
 * Bad, because it is a linter rather than a formatter: it reports problems
