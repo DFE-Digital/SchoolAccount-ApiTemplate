@@ -8,12 +8,14 @@ namespace Application.Organisations.GetByLaestab;
 public sealed class GetOrganisationByLaestabQueryHandler(IDateTimeProvider dateTimeProvider)
     : IQueryHandler<GetOrganisationByLaestabQuery, OrganisationResponse>
 {
-    public async Task<Result<OrganisationResponse>> Handle(GetOrganisationByLaestabQuery query,
-        CancellationToken cancellationToken)
+    public async Task<Result<OrganisationResponse>> Handle(
+        GetOrganisationByLaestabQuery query,
+        CancellationToken cancellationToken
+    )
     {
         var laestabValue = new LaestabValue(query.laestab);
         var statusCalculator = new StatusCalculator(dateTimeProvider);
-        
+
         var response = new OrganisationResponse
         {
             LocalAuthorityCode = laestabValue.LocalAuthorityCode,

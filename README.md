@@ -18,6 +18,7 @@ Architecture decisions are recorded as ADRs in the [decisions](decisions) folder
 - [Structure the solution using clean architecture](decisions/0002-use-clean-architecture.md) - layers, dependency rules, and code organisation
 - [Strip the imported template to a minimal core](decisions/0003-strip-imported-template-to-minimal-core.md) - what was removed from the original template and why
 - [Run tests on the Microsoft Testing Platform](decisions/0004-microsoft-testing-platform-and-ci-reporting.md) - testing platform and how results and coverage are reported in CI
+- [Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) - why formatting is automated and enforced in the build
 
 New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
@@ -67,6 +68,18 @@ Use the .NET CLI to build or test the solution.
   ```
 
 Architecture tests under `tests/ArchitectureTests` enforce the clean architecture dependency rules between layers.
+
+### Formatting
+
+Code is formatted with [CSharpier](https://csharpier.com/), installed as a local dotnet tool and enforced by the
+"Check formatting" step in the [build workflow](.github/workflows/build.yml). To format the solution locally:
+
+```bash
+dotnet csharpier format .
+```
+
+Run `dotnet tool restore` first on a fresh clone. Plugins are available for Rider, Visual Studio, and VS Code to
+format on save. See [Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) for the reasoning.
 
 ### Code Coverage
 
