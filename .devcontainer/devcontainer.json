@@ -1,0 +1,32 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "SchoolAccount-ApiTemplate",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.yml"
+  ],
+  "service": "devcontainer",
+  "runServices": ["devcontainer", "seq"],
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [5100, "seq:80"],
+  "portsAttributes": {
+    "5100": {
+      "protocol": "http",
+      "label": "DevContainer"
+    },
+    "seq:80": {
+      "label": "Seq UI"
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "postCreateCommand": "sudo apt-get update && dotnet restore SchoolAccount.ApiTemplate.slnx",
+  "shutdownAction": "none",
+  "customizations": {
+    "jetbrains": {
+      "backend": "Rider"
+    }
+  }
+}

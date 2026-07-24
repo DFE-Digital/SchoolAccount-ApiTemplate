@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Project>
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -8,7 +9,18 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	<NoWarn>NU1608</NoWarn>
+    <NoWarn>NU1608</NoWarn>
+    <!-- Both obj layouts (host obj/, devcontainer obj/container/) must stay
+         out of item globs, or each side would compile the other's generated
+         sources under obj/. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**</DefaultItemExcludes>
+  </PropertyGroup>
+  <!-- The devcontainer sets DEVCONTAINER=true (see .devcontainer/docker-compose.yml).
+       Restore artifacts (project.assets.json, caches) contain absolute paths, so
+       host and container each need their own obj. bin stays shared: outputs are
+       portable IL and .vscode/launch.json points at one path for both sides. -->
+  <PropertyGroup Condition="'$(DEVCONTAINER)' == 'true'">
+    <BaseIntermediateOutputPath>obj/container/</BaseIntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
     <PackageReference Include="SonarAnalyzer.CSharp">

@@ -14,4 +14,4 @@ services:
     environment:
       - ACCEPT_EULA=Y
     ports:
-      - "8081:80"
+      - "5341:80"
