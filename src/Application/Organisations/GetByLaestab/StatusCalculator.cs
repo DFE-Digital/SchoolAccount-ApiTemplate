@@ -6,11 +6,16 @@ public class StatusCalculator(IDateTimeProvider dateTimeProvider)
 {
     private static readonly TimeSpan StartOfDay = new(8, 0, 0);
     private static readonly TimeSpan EndOfDay = new(15, 30, 0);
-    private static readonly TimeZoneInfo BritishTimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+    private static readonly TimeZoneInfo BritishTimeZone = TimeZoneInfo.FindSystemTimeZoneById(
+        "GMT Standard Time"
+    );
 
     public OrgStatus GetOpenStatus()
     {
-        DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(dateTimeProvider.UtcNow, BritishTimeZone);
+        DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(
+            dateTimeProvider.UtcNow,
+            BritishTimeZone
+        );
         return IsWeekend(localTime) || !IsWithinSchoolHours(localTime)
             ? OrgStatus.Closed
             : OrgStatus.Open;

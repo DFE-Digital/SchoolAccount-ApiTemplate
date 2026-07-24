@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
@@ -13,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	<InternalsVisibleTo Include="Application.UnitTests" />
+    <InternalsVisibleTo Include="Application.UnitTests" />
   </ItemGroup>
-
 </Project>

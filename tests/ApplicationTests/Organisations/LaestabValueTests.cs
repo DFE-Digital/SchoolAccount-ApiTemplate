@@ -16,10 +16,10 @@ public class LaestabValueTests
         const string localAuthorityCode = "321";
         const string establishmentNo = "4567";
         const string laestab = localAuthorityCode + establishmentNo;
-        
+
         // Act
         var laestabValue = new LaestabValue(laestab);
-        
+
         // Assert
         laestabValue.LocalAuthorityCode.ShouldBe(localAuthorityCode);
         laestabValue.EstablishmentNo.ShouldBe(establishmentNo);
@@ -32,9 +32,11 @@ public class LaestabValueTests
         const string laestabValue = "123456";
 
         // Act
-        ArgumentException exception = Should.Throw<ArgumentException>(() => new LaestabValue(laestabValue));
-        
-        // Assert 
+        ArgumentException exception = Should.Throw<ArgumentException>(() =>
+            new LaestabValue(laestabValue)
+        );
+
+        // Assert
         exception.Message.ShouldBe("Laestab must be 7 characters long");
     }
 }
