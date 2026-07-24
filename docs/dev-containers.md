@@ -21,7 +21,7 @@ it up on your host machine.
 ## VS Code
 
 1. Open the repository folder in VS Code. If the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-   detects the `.devcontainer` folder, it offers a toast notification to reopen in the container — click
+   detects the `.devcontainer` folder, it offers a toast notification to reopen in the container. Click
    **Reopen in Container** and skip to step 3.
 
    ![VS Code: Open from toast pop up](images/vscode-open-via-toast.png)

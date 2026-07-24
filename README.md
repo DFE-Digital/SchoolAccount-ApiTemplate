@@ -22,7 +22,11 @@ New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
 # Getting Started
 
-Follow these steps to start the API locally.
+The recommended way to start is in a [Dev Container](docs/dev-containers.md) from VS Code or Rider, which provisions
+the .NET SDK, Docker CLI, and GitHub CLI for you, with nothing to install locally beyond Docker Desktop and the
+editor itself. See [docs/dev-containers.md](docs/dev-containers.md) for a screenshot-led walkthrough.
+
+To run the API directly on your machine instead, follow these steps.
 
 1. Install prerequisites:
     - [.NET 10 SDK](https://dotnet.microsoft.com/download)
