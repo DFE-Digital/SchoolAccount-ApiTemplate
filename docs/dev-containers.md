@@ -72,6 +72,12 @@ it up on your host machine.
 6. To reconnect later, use **File \| Remote Development...** and pick the container from the recent list, or run
    `docker ps` to confirm it's still there before reconnecting.
 
+## Debugging
+
+Debugging works the same as running locally (see [Getting Started](../README.md#getting-started)): breakpoints in
+`src/` and the `.http` files in `src/Web.Api/Endpoints` behave identically once connected, since both editors tunnel
+their debugger through the remote connection automatically. There's nothing Dev Container-specific to configure.
+
 ## Troubleshooting
 
 - **Stale image after a Dockerfile change**: rebuild without the cache , VS Code: Command Palette →
