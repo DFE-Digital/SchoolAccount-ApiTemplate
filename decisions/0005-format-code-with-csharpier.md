@@ -71,7 +71,8 @@ is excluded via [.csharpierignore](../.csharpierignore).
 The "Check formatting" step in
 [build.yml](../.github/workflows/build.yml) runs `dotnet csharpier check .`
 on every push and pull request and fails the build if any file is not
-formatted.
+formatted. Locally, a pre-commit hook in [.githooks](../.githooks), enabled
+by [init.sh](../init.sh), blocks commits containing unformatted C# files.
 
 ## Pros and Cons of the Options
 

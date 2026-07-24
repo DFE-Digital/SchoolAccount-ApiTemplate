@@ -31,7 +31,13 @@ Follow these steps to start the API locally.
     - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
     - Rider, Visual Studio, or Visual Studio Code
 
-2. Run the API using one of the following:
+2. Run the setup script from the repository root to restore the dotnet tools and enable the git hooks:
+
+   ```bash
+   ./init.sh
+   ```
+
+3. Run the API using one of the following:
 
    | Method         | Command                              | Outcome                                                              |
    |----------------|--------------------------------------|----------------------------------------------------------------------|
@@ -40,14 +46,14 @@ Follow these steps to start the API locally.
 
    In Rider or Visual Studio you can use the equivalent `docker-compose` or `http` run configurations from the toolbar.
 
-3. Once running, the API is available at `http://localhost:5100`:
+4. Once running, the API is available at `http://localhost:5100`:
     - Interactive API reference (Scalar) at `http://localhost:5100/scalar/v1`
     - Health checks at `http://localhost:5100/health`
     - Logs (if started with compose) at `http://localhost:8081`
 
    > The Scalar API reference is only mapped in the `Development` environment.
 
-4. Debugging guidance:
+5. Debugging guidance:
     - Set breakpoints in your C# files under `src/` and start either run configuration with debugging enabled.
     - `.http` files alongside the endpoints in `src/Web.Api/Endpoints` can be used to exercise the API from your IDE.
 
@@ -78,7 +84,8 @@ Code is formatted with [CSharpier](https://csharpier.com/), installed as a local
 dotnet csharpier format .
 ```
 
-Run `dotnet tool restore` first on a fresh clone. Plugins are available for Rider, Visual Studio, and VS Code to
+A pre-commit hook in [.githooks](.githooks) blocks commits containing unformatted C# files; [init.sh](init.sh)
+enables it and restores the tools on a fresh clone. Plugins are available for Rider, Visual Studio, and VS Code to
 format on save. See [Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) for the reasoning.
 
 ### Code Coverage
