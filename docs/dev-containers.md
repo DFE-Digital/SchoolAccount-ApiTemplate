@@ -17,7 +17,7 @@ it up on your host machine.
   [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (needed for the `coreclr` debugger
   that [launch.json](../.vscode/launch.json) uses) and
   [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) for running the `.http`
-  files. Extensions only installed locally, not listed here, won't be present in the container — add their IDs to
+  files. Extensions only installed locally, not listed here, won't be present in the container; add their IDs to
   that array as needed.
 - In Rider, plugins listed under `customizations.jetbrains.plugins` in the same file install automatically too.
   Currently just [NSubstituteComplete](https://plugins.jetbrains.com/plugin/15798-nsubstitutecomplete), for
@@ -44,7 +44,7 @@ it up on your host machine.
    ![VS Code: Reopen in Container](images/vscode-reopen-in-container.png)
 
 3. VS Code builds the container image and runs `updateContentCommand` (`dotnet restore`) in the integrated
-   terminal, holding off on opening the workspace until it finishes — that's the default `waitFor` target. This
+   terminal, holding off on opening the workspace until it finishes (that's the default `waitFor` target). This
    takes a few minutes the first time; later opens reuse the cached image and are much faster.
 
    ![VS Code: updateContentCommand running inside the container](images/vscode-devcontainer-postcreate.png)
@@ -93,24 +93,33 @@ their debugger through the remote connection automatically. There's nothing Dev 
 
 ## Troubleshooting
 
-- **Stale image after a Dockerfile change**: rebuild without the cache , VS Code: Command Palette →
-  **Dev Containers: Rebuild Container**; Rider: the Dev Containers connection dialog has a **Rebuild** action.
 - **Port already in use**: something on the host is already bound to `5100` or the Seq port; stop it or change
   `forwardPorts` in [devcontainer.json](../.devcontainer/devcontainer.json).
 - **Container exits immediately**: check Docker Desktop is running and has enough resources allocated (Settings \|
   Resources).
-- **VS Code: "Configured debug type 'coreclr' is not supported"**: the C# extension (which provides the `coreclr`
-  debugger used by [launch.json](../.vscode/launch.json)) isn't installed in the container. It's listed under
+
+### VS Code
+
+- **Stale image after a Dockerfile change**: Command Palette → **Dev Containers: Rebuild Container**.
+- **"Configured debug type 'coreclr' is not supported"**: the C# extension (which provides the `coreclr` debugger
+  used by [launch.json](../.vscode/launch.json)) isn't installed in the container. It's listed under
   `customizations.vscode.extensions` in [devcontainer.json](../.devcontainer/devcontainer.json), so **Rebuild
   Container** fixes it; if it's already listed and still fails, check the Extensions view for an install error.
   This can also happen transiently on a slow connection (e.g. a corporate VPN): after connecting, the extension
   still needs to download its Roslyn/debugger assets and load the projects before `coreclr` is registered, and
   there's no way to make VS Code block debugging until that's done. Instead of guessing, check the status bar
   spinner near the bottom or the **Output → C#** panel; debugging is safe to try once that panel logs
-  `Completed (re)load of all projects`. This is a one-time cost per container — it's cached afterward and won't
+  `Completed (re)load of all projects`. This is a one-time cost per container: it's cached afterward and won't
   recur until the next **Rebuild Container**.
 - **"Package X was not found" errors from the language server right after connecting**: the C# language server
   started loading projects before `updateContentCommand`'s `dotnet restore` finished. VS Code waits for
-  `updateContentCommand` by default, so this shouldn't happen there; Rider doesn't honor that lifecycle the same
-  way, so in Rider these errors clear on their own once restore finishes, or a **Reload All Projects** on the
-  solution can force it.
+  `updateContentCommand` by default, so this shouldn't happen; if it does, check the integrated terminal for
+  whether restore actually completed.
+
+### Rider
+
+- **Stale image after a Dockerfile change**: the Dev Containers connection dialog has a **Rebuild** action.
+- **"Package X was not found" errors from the language server right after connecting**: the language server
+  started loading projects before `updateContentCommand`'s `dotnet restore` finished. Rider doesn't wait on that
+  lifecycle the way VS Code does, so these errors clear on their own once restore finishes, or a **Reload All
+  Projects** on the solution can force it.
