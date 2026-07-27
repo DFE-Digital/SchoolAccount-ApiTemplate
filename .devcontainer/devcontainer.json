@@ -22,7 +22,7 @@
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "postCreateCommand": "sudo apt-get update && dotnet restore SchoolAccount.ApiTemplate.slnx",
+  "updateContentCommand": "sudo apt-get update && dotnet restore SchoolAccount.ApiTemplate.slnx",
   "shutdownAction": "none",
   "customizations": {
     "jetbrains": {
@@ -30,7 +30,7 @@
       "plugins": ["nsubstitutecomplete-rider"]
     },
     "vscode": {
-      "extensions": ["humao.rest-client"]
+      "extensions": ["humao.rest-client", "ms-dotnettools.csharp"]
     }
   }
 }
