@@ -1,0 +1,14 @@
+services:
+  devcontainer:
+    build:
+      context: ./.devcontainer
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace:cached
+    command: sleep infinity
+    depends_on:
+      seq:
+        condition: service_started
+    environment:
+      - DEVCONTAINER=true
+      - Serilog__WriteTo__1__Args__ServerUrl=http://seq:5341

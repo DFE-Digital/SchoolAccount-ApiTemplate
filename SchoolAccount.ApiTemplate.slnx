@@ -6,6 +6,12 @@
     <File Path="decisions\0003-strip-imported-template-to-minimal-core.md" />
     <File Path="decisions\0004-microsoft-testing-platform-and-ci-reporting.md" />
   </Folder>
+  <Folder Name="/devcontainer/">
+    <File Path=".devcontainer\devcontainer-lock.json" />
+    <File Path=".devcontainer\devcontainer.json" />
+    <File Path=".devcontainer\docker-compose.yml" />
+    <File Path=".devcontainer\Dockerfile" />
+  </Folder>
   <Folder Name="/docs/">
     <File Path="docs\clean-architecture.md" />
     <File Path="docs\testing-standards.md" />

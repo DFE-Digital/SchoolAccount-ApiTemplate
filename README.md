@@ -11,6 +11,7 @@ from scratch.
 - [Testing Standards](docs/testing-standards.md) - conventions and practices for writing tests
 - [Integration Testing](docs/integration-testing.md) - guidance on integration testing of the API endpoints
 - [Open API Documentation](docs/open-api-documentation.md) - guidance on adding Open API documentation to endpoints
+- [Dev Containers](docs/dev-containers.md) - running the project in a Dev Container from VS Code or Rider
 
 Architecture decisions are recorded as ADRs in the [decisions](decisions) folder:
 
@@ -23,7 +24,11 @@ New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
 # Getting Started
 
-Follow these steps to start the API locally.
+The recommended way to start is in a [Dev Container](docs/dev-containers.md) from VS Code or Rider, which provisions
+the .NET SDK, Docker CLI, and GitHub CLI for you, with nothing to install locally beyond Docker Desktop and the
+editor itself. See [docs/dev-containers.md](docs/dev-containers.md) for a screenshot-led walkthrough.
+
+To run the API directly on your machine instead, follow these steps.
 
 1. Install prerequisites:
     - [.NET 10 SDK](https://dotnet.microsoft.com/download)
