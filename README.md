@@ -8,6 +8,7 @@ from scratch.
 ## Documentation
 
 - [Clean Architecture](docs/clean-architecture.md) - layers, dependency rules, and code organisation
+- [Coding Standards](docs/coding-standards.md) - formatting, code analysis, naming, and style conventions
 - [Testing Standards](docs/testing-standards.md) - conventions and practices for writing tests
 - [Integration Testing](docs/integration-testing.md) - guidance on integration testing of the API endpoints
 - [Open API Documentation](docs/open-api-documentation.md) - guidance on adding Open API documentation to endpoints
@@ -19,6 +20,7 @@ Architecture decisions are recorded as ADRs in the [decisions](decisions) folder
 - [Strip the imported template to a minimal core](decisions/0003-strip-imported-template-to-minimal-core.md) - what was removed from the original template and why
 - [Run tests on the Microsoft Testing Platform](decisions/0004-microsoft-testing-platform-and-ci-reporting.md) - testing platform and how results and coverage are reported in CI
 - [Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) - why formatting is automated and enforced in the build
+- [Enforce code quality with Roslyn analysers](decisions/0006-enforce-code-quality-with-roslyn-analysers.md) - why SonarAnalyzer.CSharp and strict analysis are enforced in the build
 
 New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
@@ -91,6 +93,17 @@ A pre-commit hook, managed by [Husky.NET](https://alirezanet.github.io/Husky.Net
 [VS Code extension](https://marketplace.visualstudio.com/items?itemName=csharpier.csharpier-vscode); the
 [editors documentation](https://csharpier.com/docs/Editors) covers setup for these and other IDEs. See
 [Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) for the reasoning.
+
+### Code Analysis
+
+The build runs with the full set of .NET/Roslyn analyzers (`AnalysisLevel=latest`, `AnalysisMode=All`) plus
+[SonarAnalyzer.CSharp](https://www.sonarsource.com/products/sonarlint/), configured in
+[Directory.Build.props](Directory.Build.props). `TreatWarningsAsErrors` means any violation fails `dotnet build`,
+locally and in the [build workflow](.github/workflows/build.yml), rather than being left as a warning. Rules that
+don't fit this codebase are suppressed by ID in [.editorconfig](.editorconfig). See
+[Coding Standards](docs/coding-standards.md) and
+[Enforce code quality with Roslyn analysers](decisions/0006-enforce-code-quality-with-roslyn-analysers.md) for the
+conventions and the reasoning.
 
 ### Code Coverage
 
