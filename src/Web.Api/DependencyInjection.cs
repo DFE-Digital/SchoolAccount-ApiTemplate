@@ -18,6 +18,7 @@ public static class DependencyInjection
     private static void ReturnEnumsAsString(IServiceCollection services)
     {
         services.ConfigureHttpJsonOptions(options =>
-            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter())
+        );
     }
 }

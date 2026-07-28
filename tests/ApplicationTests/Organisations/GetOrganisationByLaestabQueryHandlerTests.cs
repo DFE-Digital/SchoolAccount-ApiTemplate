@@ -8,8 +8,7 @@ namespace ApplicationTests.Organisations;
 public class GetOrganisationByLaestabQueryHandlerTests
 {
     [Fact]
-    public async Task
-        Handler_takes_a_laestab_and_returns_school_open_status_localAuthorityCode_and_establishmentNumber()
+    public async Task Handler_takes_a_laestab_and_returns_school_open_status_localAuthorityCode_and_establishmentNumber()
     {
         // arrange
         string localAuthorityCode = "321";
@@ -22,8 +21,10 @@ public class GetOrganisationByLaestabQueryHandlerTests
         var handler = new GetOrganisationByLaestabQueryHandler(dateTimeProvider);
 
         // act
-        Result<OrganisationResponse> result =
-            await handler.Handle(new GetOrganisationByLaestabQuery(laestab), CancellationToken.None);
+        Result<OrganisationResponse> result = await handler.Handle(
+            new GetOrganisationByLaestabQuery(laestab),
+            CancellationToken.None
+        );
 
         // assert
         result.IsSuccess.ShouldBeTrue();

@@ -32,6 +32,11 @@ jobs:
       - name: Restore
         run: dotnet restore SchoolAccount.ApiTemplate.slnx
 
+      - name: Check formatting
+        run: |
+          dotnet tool restore
+          dotnet csharpier check .
+
       - name: Build
         run: dotnet build SchoolAccount.ApiTemplate.slnx --configuration Release --no-restore
 

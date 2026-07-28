@@ -16,7 +16,8 @@ public static class CustomResults
             detail: GetDetail(result.Error),
             type: GetType(result.Error.Type),
             statusCode: GetStatusCode(result.Error.Type),
-            extensions: GetErrors(result));
+            extensions: GetErrors(result)
+        );
 
         static string GetTitle(Error error) =>
             error.Type switch
@@ -25,7 +26,7 @@ public static class CustomResults
                 ErrorType.Problem => error.Code,
                 ErrorType.NotFound => error.Code,
                 ErrorType.Conflict => error.Code,
-                _ => "Server failure"
+                _ => "Server failure",
             };
 
         static string GetDetail(Error error) =>
@@ -35,7 +36,7 @@ public static class CustomResults
                 ErrorType.Problem => error.Description,
                 ErrorType.NotFound => error.Description,
                 ErrorType.Conflict => error.Description,
-                _ => "An unexpected error occurred"
+                _ => "An unexpected error occurred",
             };
 
         static string GetType(ErrorType errorType) =>
@@ -45,7 +46,7 @@ public static class CustomResults
                 ErrorType.Problem => "https://tools.ietf.org/html/rfc7231#section-6.5.1",
                 ErrorType.NotFound => "https://tools.ietf.org/html/rfc7231#section-6.5.4",
                 ErrorType.Conflict => "https://tools.ietf.org/html/rfc7231#section-6.5.8",
-                _ => "https://tools.ietf.org/html/rfc7231#section-6.6.1"
+                _ => "https://tools.ietf.org/html/rfc7231#section-6.6.1",
             };
 
         static int GetStatusCode(ErrorType errorType) =>
@@ -54,7 +55,7 @@ public static class CustomResults
                 ErrorType.Validation or ErrorType.Problem => StatusCodes.Status400BadRequest,
                 ErrorType.NotFound => StatusCodes.Status404NotFound,
                 ErrorType.Conflict => StatusCodes.Status409Conflict,
-                _ => StatusCodes.Status500InternalServerError
+                _ => StatusCodes.Status500InternalServerError,
             };
 
         static Dictionary<string, object?>? GetErrors(Result result)
@@ -64,10 +65,7 @@ public static class CustomResults
                 return null;
             }
 
-            return new Dictionary<string, object?>
-            {
-                { "errors", validationError.Errors }
-            };
+            return new Dictionary<string, object?> { { "errors", validationError.Errors } };
         }
     }
 }

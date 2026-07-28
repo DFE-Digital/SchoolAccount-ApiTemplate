@@ -8,6 +8,7 @@ from scratch.
 ## Documentation
 
 - [Clean Architecture](docs/clean-architecture.md) - layers, dependency rules, and code organisation
+- [Coding Standards](docs/coding-standards.md) - formatting, code analysis, naming, and style conventions
 - [Testing Standards](docs/testing-standards.md) - conventions and practices for writing tests
 - [Integration Testing](docs/integration-testing.md) - guidance on integration testing of the API endpoints
 - [Open API Documentation](docs/open-api-documentation.md) - guidance on adding Open API documentation to endpoints
@@ -18,6 +19,8 @@ Architecture decisions are recorded as ADRs in the [decisions](decisions) folder
 - [Structure the solution using clean architecture](decisions/0002-use-clean-architecture.md) - layers, dependency rules, and code organisation
 - [Strip the imported template to a minimal core](decisions/0003-strip-imported-template-to-minimal-core.md) - what was removed from the original template and why
 - [Run tests on the Microsoft Testing Platform](decisions/0004-microsoft-testing-platform-and-ci-reporting.md) - testing platform and how results and coverage are reported in CI
+- [Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) - why formatting is automated and enforced in the build
+- [Enforce code quality with Roslyn analysers](decisions/0006-enforce-code-quality-with-roslyn-analysers.md) - why SonarAnalyzer.CSharp and strict analysis are enforced in the build
 
 New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
@@ -30,7 +33,13 @@ Follow these steps to start the API locally.
     - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
     - Rider, Visual Studio, or Visual Studio Code
 
-2. Run the API using one of the following:
+2. Run the setup script from the repository root to restore the dotnet tools and enable the git hooks:
+
+   ```bash
+   ./init.sh
+   ```
+
+3. Run the API using one of the following:
 
    | Method         | Command                              | Outcome                                                              |
    |----------------|--------------------------------------|----------------------------------------------------------------------|
@@ -39,14 +48,14 @@ Follow these steps to start the API locally.
 
    In Rider or Visual Studio you can use the equivalent `docker-compose` or `http` run configurations from the toolbar.
 
-3. Once running, the API is available at `http://localhost:5100`:
+4. Once running, the API is available at `http://localhost:5100`:
     - Interactive API reference (Scalar) at `http://localhost:5100/scalar/v1`
     - Health checks at `http://localhost:5100/health`
     - Logs (if started with compose) at `http://localhost:8081`
 
    > The Scalar API reference is only mapped in the `Development` environment.
 
-4. Debugging guidance:
+5. Debugging guidance:
     - Set breakpoints in your C# files under `src/` and start either run configuration with debugging enabled.
     - `.http` files alongside the endpoints in `src/Web.Api/Endpoints` can be used to exercise the API from your IDE.
 
@@ -67,6 +76,34 @@ Use the .NET CLI to build or test the solution.
   ```
 
 Architecture tests under `tests/ArchitectureTests` enforce the clean architecture dependency rules between layers.
+
+### Formatting
+
+Code is formatted with [CSharpier](https://csharpier.com/), installed as a local dotnet tool and enforced by the
+"Check formatting" step in the [build workflow](.github/workflows/build.yml). To format the solution locally:
+
+```bash
+dotnet csharpier format .
+```
+
+A pre-commit hook, managed by [Husky.NET](https://alirezanet.github.io/Husky.Net/) and configured in
+[.husky/task-runner.json](.husky/task-runner.json), formats staged C# files automatically before each commit;
+[init.sh](init.sh) installs it and restores the tools on a fresh clone. To format on save, install the
+[Rider plugin](https://plugins.jetbrains.com/plugin/18243-csharpier) or the
+[VS Code extension](https://marketplace.visualstudio.com/items?itemName=csharpier.csharpier-vscode); the
+[editors documentation](https://csharpier.com/docs/Editors) covers setup for these and other IDEs. See
+[Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) for the reasoning.
+
+### Code Analysis
+
+The build runs with the full set of .NET/Roslyn analyzers (`AnalysisLevel=latest`, `AnalysisMode=All`) plus
+[SonarAnalyzer.CSharp](https://www.sonarsource.com/products/sonarlint/), configured in
+[Directory.Build.props](Directory.Build.props). `TreatWarningsAsErrors` means any violation fails `dotnet build`,
+locally and in the [build workflow](.github/workflows/build.yml), rather than being left as a warning. Rules that
+don't fit this codebase are suppressed by ID in [.editorconfig](.editorconfig). See
+[Coding Standards](docs/coding-standards.md) and
+[Enforce code quality with Roslyn analysers](decisions/0006-enforce-code-quality-with-roslyn-analysers.md) for the
+conventions and the reasoning.
 
 ### Code Coverage
 
