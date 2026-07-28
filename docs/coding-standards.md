@@ -65,6 +65,7 @@ list and the file ever disagree.
 - Types are `PascalCase`.
 - Interfaces are `PascalCase` prefixed with `I`.
 - Non-field members (properties, events, methods) are `PascalCase`.
+- Private and internal fields are `_camelCase`, prefixed with an underscore.
 
 See the `#### Naming styles ####` section of [.editorconfig](../.editorconfig) for the full rule
 definitions.
