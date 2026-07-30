@@ -21,6 +21,7 @@ Architecture decisions are recorded as ADRs in the [decisions](decisions) folder
 - [Run tests on the Microsoft Testing Platform](decisions/0004-microsoft-testing-platform-and-ci-reporting.md) - testing platform and how results and coverage are reported in CI
 - [Format code with CSharpier](decisions/0005-format-code-with-csharpier.md) - why formatting is automated and enforced in the build
 - [Enforce code quality with Roslyn analysers](decisions/0006-enforce-code-quality-with-roslyn-analysers.md) - why SonarAnalyzer.CSharp and strict analysis are enforced in the build
+- [Validate requests with Data Annotations](decisions/0007-validate-requests-with-data-annotations.md) - why request shape is validated with Data Annotations rather than a FluentValidation decorator
 
 New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
