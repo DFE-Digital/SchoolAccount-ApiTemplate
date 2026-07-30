@@ -83,7 +83,7 @@ Infrastructure depends on both Domain and Application but is never referenced by
 
 ### 4. Presentation
 
-The entry point to the system - the Web API project. In this solution that is `Web.Api`.
+The entry point to the system - the Web API project. In this solution that is `SchoolAccount.Web.Api`.
 
 Contains:
 - **Endpoints** - thin wrappers implementing `IEndpoint` that dispatch Commands and Queries
@@ -105,25 +105,26 @@ Domain ← Application ← Infrastructure
 
 The arrows show the direction of **allowed** dependencies. No arrow ever points toward Infrastructure from the inner layers.
 
-These rules are enforced by the tests in `tests/ArchitectureTests`.
+These rules are enforced by the tests in `tests/SchoolAccount.ArchitectureTests`.
 
 ---
 
 ## How This Solution Applies Clean Architecture
 
-| Layer          | Project          |
-|----------------|------------------|
-| Domain         | `Domain`         |
-| Application    | `Application`    |
-| Infrastructure | `Infrastructure` |
-| Presentation   | `Web.Api`        |
-| Shared kernel  | `SharedKernel`   |
+| Layer          | Project                        |
+|----------------|--------------------------------|
+| Domain         | `SchoolAccount.Domain`         |
+| Application    | `SchoolAccount.Application`    |
+| Infrastructure | `SchoolAccount.Infrastructure` |
+| Presentation   | `SchoolAccount.Web.Api`        |
+| Shared kernel  | `SchoolAccount.SharedKernel`   |
 
-`SharedKernel` contains primitives used across all layers (`Result<T>`, `Error`, `ValidationError`, `IDateTimeProvider`)
-and sits outside the ring model - it has no dependencies itself and can be referenced by any layer.
+`SchoolAccount.SharedKernel` contains primitives used across all layers (`Result<T>`, `Error`, `ValidationError`,
+`IDateTimeProvider`) and sits outside the ring model - it has no dependencies itself and can be referenced by any
+layer.
 
-The Application layer organises features using **package by feature** under `src/Application/`, with each use case in
-its own folder.
+The Application layer organises features using **package by feature** under `src/SchoolAccount.Application/`,
+with each use case in its own folder.
 
 ---
 
