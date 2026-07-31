@@ -42,10 +42,10 @@ Follow these steps to start the API locally.
 
 3. Run the API using one of the following:
 
-   | Method         | Command                              | Outcome                                                              |
-   |----------------|--------------------------------------|----------------------------------------------------------------------|
-   | Docker Compose | `docker compose up --build`          | Starts the API and its dependencies (Seq) in containers              |
-   | .NET CLI       | `dotnet run --project src/Web.Api`   | Runs the API directly using the `http` launch profile, no containers |
+   | Method         | Command                                          | Outcome                                                              |
+   |----------------|--------------------------------------------------|----------------------------------------------------------------------|
+   | Docker Compose | `docker compose up --build`                      | Starts the API and its dependencies (Seq) in containers              |
+   | .NET CLI       | `dotnet run --project src/SchoolAccount.Web.Api` | Runs the API directly using the `http` launch profile, no containers |
 
    In Rider or Visual Studio you can use the equivalent `docker-compose` or `http` run configurations from the toolbar.
 
@@ -58,7 +58,7 @@ Follow these steps to start the API locally.
 
 5. Debugging guidance:
     - Set breakpoints in your C# files under `src/` and start either run configuration with debugging enabled.
-    - `.http` files alongside the endpoints in `src/Web.Api/Endpoints` can be used to exercise the API from your IDE.
+    - `.http` files alongside the endpoints in `src/SchoolAccount.Web.Api/Endpoints` can be used to exercise the API from your IDE.
 
 # Build and Test
 
@@ -76,7 +76,7 @@ Use the .NET CLI to build or test the solution.
   dotnet test
   ```
 
-Architecture tests under `tests/ArchitectureTests` enforce the clean architecture dependency rules between layers.
+Architecture tests under `tests/SchoolAccount.ArchitectureTests` enforce the clean architecture dependency rules between layers.
 
 ### Formatting
 
@@ -131,13 +131,13 @@ finishes:
 
 The solution follows a clean architecture pattern with vertical slice features:
 
-| Project          | Purpose                                                      |
-|------------------|--------------------------------------------------------------|
-| `Web.Api`        | ASP.NET Core Web API - endpoints, middleware, error handling |
-| `Application`    | CQRS handlers and feature logic, organised by feature folder |
-| `Domain`         | Domain entities and business rules                           |
-| `Infrastructure` | External concerns - time, data access, integrations          |
-| `SharedKernel`   | Shared primitives - `Result<T>`, `Error`, `ValidationError`  |
+| Project                        | Purpose                                                      |
+|--------------------------------|--------------------------------------------------------------|
+| `SchoolAccount.Web.Api`        | ASP.NET Core Web API - endpoints, middleware, error handling |
+| `SchoolAccount.Application`    | CQRS handlers and feature logic, organised by feature folder |
+| `SchoolAccount.Domain`         | Domain entities and business rules                           |
+| `SchoolAccount.Infrastructure` | External concerns - time, data access, integrations          |
+| `SchoolAccount.SharedKernel`   | Shared primitives - `Result<T>`, `Error`, `ValidationError`  |
 
 Each endpoint implements `IEndpoint` and is discovered and mapped automatically at startup. See
 [Structure the solution using clean architecture](decisions/0002-use-clean-architecture.md) for the dependency rules.

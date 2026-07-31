@@ -55,9 +55,9 @@ Core validates them automatically before the endpoint delegate runs, with no dec
 validator class needed for what is usually a handful of attributes.
 
 `services.AddValidation()` in
-[Web.Api/DependencyInjection.cs](../src/Web.Api/DependencyInjection.cs) wires up ASP.NET Core's
-built-in minimal API validation. `GetByLaestabRequest.Laestab` in
-[GetByLaestabRequest.cs](../src/Web.Api/Endpoints/Organisations/GetByLaestab/GetByLaestabRequest.cs)
+[SchoolAccount.Web.Api/DependencyInjection.cs](../src/SchoolAccount.Web.Api/DependencyInjection.cs) wires
+up ASP.NET Core's built-in minimal API validation. `GetByLaestabRequest.Laestab` in
+[GetByLaestabRequest.cs](../src/SchoolAccount.Web.Api/Endpoints/Organisations/GetByLaestab/GetByLaestabRequest.cs)
 carries a `[RegularExpression]` attribute as the example. A malformed value never reaches
 `GetOrganisationByLaestabQueryHandler`; the endpoint's `.ProducesValidationProblem()` documents the
 response the client gets instead.
@@ -87,13 +87,14 @@ up front.
   anything needing other data (a database lookup, a cross-field business rule) has no attribute to
   express it and must be checked inside the handler instead.
 * Neutral, because `FluentValidation.DependencyInjectionExtensions` remains referenced in
-  [Application.csproj](../src/Application/Application.csproj) for that case. Nothing currently
+  [SchoolAccount.Application.csproj](../src/SchoolAccount.Application/SchoolAccount.Application.csproj)
+  for that case. Nothing currently
   uses it; if a query or command needs it, wrap that specific handler the way `LoggingDecorator`
   does, rather than making FluentValidation the default for every handler.
 
 ### Confirmation
 
-[GetByLaestabTests.cs](../tests/IntegrationTests/EndPoints/Organisations/GetByLaestabTests.cs)
+[GetByLaestabTests.cs](../tests/SchoolAccount.Web.Api.IntegrationTests/EndPoints/Organisations/GetByLaestabTests.cs)
 exercises the endpoint with a malformed LAESTAB value and asserts the validation problem response,
 confirming the request never reaches the query handler.
 

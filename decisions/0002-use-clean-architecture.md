@@ -40,16 +40,17 @@ can be enforced mechanically at the assembly level.
 The solution is split into five projects, with all dependencies pointing
 inward:
 
-* `SharedKernel` - base building blocks (`Result`, `Error`) with no dependencies.
-* `Domain` - entities and business rules; depends only on `SharedKernel`.
-* `Application` - command/query handlers for each use case, implementing
+* `SchoolAccount.SharedKernel` - base building blocks (`Result`, `Error`) with no dependencies.
+* `SchoolAccount.Domain` - entities and business rules; depends only on `SchoolAccount.SharedKernel`.
+* `SchoolAccount.Application` - command/query handlers for each use case, implementing
   `ICommandHandler`/`IQueryHandler` interfaces. Handlers are decorated with cross-cutting
-  concerns such as validation and logging. Depends on `Domain` and `SharedKernel`.
-* `Infrastructure` - EF Core/PostgreSQL persistence, authentication, time -
+  concerns such as validation and logging. Depends on `SchoolAccount.Domain` and
+  `SchoolAccount.SharedKernel`.
+* `SchoolAccount.Infrastructure` - EF Core/PostgreSQL persistence, authentication, time -
   implementations of abstractions the inner layers define; depends on
-  `Application`.
-* `Web.Api` - minimal API endpoints and composition root; references
-  `Infrastructure` only to wire dependency injection.
+  `SchoolAccount.Application`.
+* `SchoolAccount.Web.Api` - minimal API endpoints and composition root; references
+  `SchoolAccount.Infrastructure` only to wire dependency injection.
 
 ### Consequences
 
@@ -65,10 +66,10 @@ inward:
 
 ### Confirmation
 
-`tests/ArchitectureTests` encodes the dependency rules with NetArchTest (e.g.
-`Domain` must not depend on `Application`, `Application` must not depend on
-`Infrastructure`). These tests run in the `Build` workflow on every pull
-request, so a violating change cannot merge cleanly.
+`tests/SchoolAccount.ArchitectureTests` encodes the dependency rules with NetArchTest (e.g.
+`SchoolAccount.Domain` must not depend on `SchoolAccount.Application`,
+`SchoolAccount.Application` must not depend on `SchoolAccount.Infrastructure`). These tests run in the
+`Build` workflow on every pull request, so a violating change cannot merge cleanly.
 
 ## More Information
 
