@@ -29,6 +29,8 @@ New decisions should follow the [ADR template](decisions/0000-adr-template.md).
 
 Follow these steps to start the API locally.
 
+**Note:** Windows users can use the `git bash` command prompt to run the project's `.sh` bash scripts.
+
 1. Install prerequisites:
     - [.NET 10 SDK](https://dotnet.microsoft.com/download)
     - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
