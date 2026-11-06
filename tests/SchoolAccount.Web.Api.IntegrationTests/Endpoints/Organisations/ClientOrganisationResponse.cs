@@ -1,4 +1,4 @@
-namespace SchoolAccount.Web.Api.IntegrationTests.EndPoints.Organisations;
+namespace SchoolAccount.Web.Api.IntegrationTests.Endpoints.Organisations;
 
 public record ClientOrganisationResponse(
     string LocalAuthorityCode,
